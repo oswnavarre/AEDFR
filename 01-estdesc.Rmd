@@ -81,7 +81,7 @@ En el código que se muestra a continuación en la variable `x` almacenaremos un
 x <- c(3,7,9,5,6,2,1,10) 
 ```
 
- Recuerde que este código se ejecuta con la combinación de teclas __Ctrl + Enter__. Para poder realizar análisis estadístico, es necesario cargar nuestros datos en el programa. R acepta algunos formatos de archivos, como por ejemplo archivos de Excel, archivos de valores separados por coma, archivos de texto e inclusive archivos de otros programas como SPSS. Lo más usual es trabajar con archvo de valores separados por coma es decir con extensión `.csv`, estos archivos `csv` se generan cuando el investigador recolecta la información, la almacena en un archivo de Excel o alguna otra hoja de cálculo y la guarda como un archivo de valores separados por coma. 
+Recuerde que este código se ejecuta con la combinación de teclas __Ctrl + Enter__. Para poder realizar análisis estadístico, es necesario cargar nuestros datos en el programa. R acepta algunos formatos de archivos, como por ejemplo archivos de Excel, archivos de valores separados por coma, archivos de texto e inclusive archivos de otros programas como SPSS. Lo más usual es trabajar con archvo de valores separados por coma es decir con extensión `.csv`, estos archivos `csv` se generan cuando el investigador recolecta la información, la almacena en un archivo de Excel o alguna otra hoja de cálculo y la guarda como un archivo de valores separados por coma. 
 
 Para trabajar de forma eficiente con R existen dos formas la primera es fijar un directorio de trabajo y la segunda es crear un proyecto. Un directorio de trabajo es el espacio donde deben estar guardados nuestros archivos en el formato que sea de nuestra preferencia. Una forma de fijar el directorio de trabajo es desde la barra de menú escoger las opciones __Session, Set Working Directory, Choose Directory__ o desde el teclado con la combinación __Ctrl+Shift+H__, o con la función `setwd("rutadelarchivo")`. 
 Sin embargo la mejor forma de trabajar, por la experiencia de los autores, es crear un proyecto. Para crear un proyecto primero debemos presionar __File, New Project__ como se ve en la figura \@ref(fig:project1)
@@ -107,7 +107,7 @@ knitr::include_graphics("project3.png")
 
 ```
 
-Finalmente se crea nuestro proyecto, la ventana de Rstudio ahora en la parte superior derecha muestra el nombre de nuestro proyecto. Tal como se aprecia en la figura \@ref(fig:project4)
+Finalmente se crea nuestro proyecto, la ventana de Rstudio ahora en la parte superior derecha muestra el nombre de nuestro proyecto. Tal como se aprecia en la figura \@ref(fig:project4). 
 
 ```{r project4, out.width = "40%",fig.cap="Nuevo Proyecto. Paso Final",fig.align = 'center', echo=FALSE,fig.pos='!h'}
 
@@ -115,6 +115,7 @@ knitr::include_graphics("project4.png")
 
 ```
 
+Dentro de este proyecto creamos los scripts que necesitemos para nuestro análisis de datos. 
 \newpage 
 
 En este primer ejercicio trabajaremos con el archivo *cap2_big4_size.csv*. Los datos serán guardados en una variable llamada `big4size`, usaremos la función  `read.csv()` para leer los datos. La función `read.csv()` recibe las instrucciones `read.csv("archivo", header=T, sep=";",dec=",")`.  La opción `"archivo"` indica el nombre del archivo, `header=T` o `header=F` permite indicar si las columnas tienen o no un encabezado que las identifique, `sep=";"` sirve para indicar cual es el separador presente en nuestro archivo en algunas ocasiones ocurre que un archivo de valores separado por coma en realidad tiene sus valores separados por un punto y cona esto generalmente ocurre cuando el sistema operativo utiliza, como en este caso, la coma como separador decimal y finalmente la opción `dec=","` sirve para indicar que el separador decimal es la coma. 
@@ -136,6 +137,7 @@ knitr::kable(
 Sin más preámbulos, empecemos a trabajar. Recapitulando nuestro flujo de trabajo es:
 
 1. Configurar el directorio de trabajo o crear un proyecto. Este paso ya fue realizado.
+2. Crear un script donde escribiremos todo el código de nuestro análisis de datos.
 2. Cargar el archivo indicado.
 3.  Finalmente usamos la función `str()`, que nos permite obtener la descripción de la estructura de los datos. 
 
@@ -604,7 +606,10 @@ Una tabla de contingencia es una forma útil para examinar relaciones entre dos 
 
 Para ejemplificar la construcción de una tabla de contingencia vamos a trabajar con el archivo `Ranking2018Guayas.csv` que tiene información sobre 23457 empresas de la provincia del Guayas. Se analizará la relación entre la ciudad y el tamaño de las empresas. 
 
-```{r, echo=TRUE, eval=TRUE}
+Para construir tablas de contingencia se utiliza la función `spread( )` del paquete `tidyr`. El uso básico de esta función es `spread(datos, clave,valor)` donde `clave` corresponde a las columnas que se usarán y `valor` al número que se incluirá en la tabla. En este caso escribimos `spread(TAMAÑO, n),` no indicamos los datos porque se hace uso del operador %>% antes de la función `spread()`.
+
+```{r, echo=TRUE, eval=TRUE, warning=FALSE}
+library(tidyr)
 rank2018 = read.csv("Ranking2018Guayas.csv",header=TRUE, sep=";",dec=",")
 
 ciudad.tama = rank2018 %>% 
@@ -686,6 +691,45 @@ write.xlsx(ciudad.tama.porc, "tablas.xlsx", sheetName = "contingencia_rel", row.
 
 \newpage
 
+### Las funciones `spread` y `gather` 
+
+En la sección anterior hicimos uso de la función `spread( )`. Esta función tiene una función complementaria llamada `gather`. Para comprender mejor el uso de estas funciones, vamos a usar un conjunto de datos llamado `IPC.csv`. En este conjunto de datos se encuentra el valor del *Índice de Precios al Consumidor* desde enero de 1995 hasta diciembre de 2018. 
+
+```{r}
+IPC = read.csv("IPC.csv",header = TRUE, dec=",", sep = ";")
+head(IPC)
+```
+
+Se puede observar que este conjunto tiene 24 observaciones una por cada año y 13 variables la primera variable es `AÑO` y las otras 12 variables corresponden a los meses del año. Supongamos que queremos transformar este conjunto **ancho** a un conjunto **largo** con solo tres variables `AÑO`, `MES` e `IPC`. en este caso usamos la función `gather`. 
+
+
+```{r}
+IPC2 = IPC %>%
+  gather(key = "MES", value = "IPC", 2:13)
+
+head(IPC2)
+```
+
+Podemos observar que los nombres de las columnas que estaban de la columna 2 a la 13 ahora están como categorías de la variable mes y que los valores que antes estaban en estas columna ahora se almacenan en una variable llamada `ÌPC`. 
+
+Si deseamos regresar al conjunto inicial utilizamos la función `spread()`
+
+```{r}
+IPC3 = IPC2 %>%
+  spread(key = "MES", value = "IPC")
+
+head(IPC3)
+```
+
+Podemos observar que el conjunto `IPC3` es igual al conjunto de datos inicial, con la diferencia que las columnas de los meses se han ordenado alfabeticamente. En secciones posteriores aprenderemos a trabajar con variables relacionadas a tiempo. En resumen la función `gather( )` transforma datos anchos a datos largos y `spread( )` transforma datos largos a datos anchos.  
+
+```{r gatspr, out.width = "50%",fig.cap="Datos largos y datos anchos",fig.align = 'center', echo=FALSE,fig.pos='!h'}
+
+knitr::include_graphics("gat_spr.png")
+```
+
+\newpage
+
 ## Gráficos y Visualización
 
 Para realizar gráficas R tiene algunos paquetes disponibles, sin embargo en este texto trabajaremos con el paquete  `ggplot2`. Este paquete está basada en la gramática de los gráficos [@wilkinson2005].
@@ -724,10 +768,23 @@ ggplot(rank2018, aes(x=VENTAS/1000000, fill=TAMAÑO)) +
   geom_histogram(alpha=0.3, color="black",bins = 20) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1), 
         panel.background = element_rect(fill="white")) +
-  xlab("Ventas en Miles") + ylab("Frecuencia") 
+  xlab("Ventas en Millones") + ylab("Frecuencia") 
 ```
 
-Se puede observar en la \@ref(fig:figura3) que algunas empresas medianas tienen mayores ventas que el resto de empresas. Una mejor forma de comparar la distribución de una variable de acuerdo a otra variable es usar los diagramas de caja que serán discutidos en profundidad en la sección \@ref(boxes). 
+Se puede observar en la \@ref(fig:figura3) que algunas empresas grandes tienen mayores ventas que el resto de empresas. Una mejor forma de comparar la distribución de una variable de acuerdo a otra variable es usar los diagramas de caja que serán discutidos en profundidad en la sección \@ref(boxes). 
+
+Si se desea ver los histogramas de acuerdo al tamaño de empresa se puede separar los histogramas con la opción `facet_grid(. ~ VARIABLE)`, dentro de esta opción se escribe el nombre de la variable por la que se quiere separar el gráfico, en este caso se escribe `facet_grid(. ~ TAMAÑO)`. Un ejemplo se visualiza en la figura \@ref(fig:histfacet).
+
+```{r histfacet, echo=TRUE,out.width = "60%",fig.cap="Histograma de las Ventas de Acuerdo al Tamaño de la empresa", fig.pos='h!'}
+
+ggplot(rank2018, aes(x=VENTAS/1000000)) + 
+  geom_histogram(alpha=0.3, color="black",bins = 10) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), 
+        panel.background = element_rect(fill="white")) +
+  xlab("Ventas en Miles") + ylab("Frecuencia") +
+  facet_grid(. ~ TAMAÑO)
+```
+
 
 #### Simetría y sesgo 
 
@@ -836,9 +893,9 @@ El conjunto de datos tiene 507 observaciones con 12 variables. Las variables pre
 7. `SECTOR` variable cualitativa con nivel de medición ordinal que indica el sector al que pertenece la empresa.
 8. `EMPLEADOS`variable cuantitativa discreta que almacena el número de empleados de la empresa.
 9. `ACTIVO` variable cuantitativa continua que almacena el valor de los activos en libros de la empresa.
-10. `PATRIMONIO` varaible cuantitativa continua que almacena el valor del patrimonio en libros de la empresa.
-11. `VENTAS` varaible cuantitativa continua que almacena el valor de las ventas en libros de la empresa.
-12. `UTILIDAD` varaible cuantitativa continua que almacena el valor de la utilidad en libros de la empresa.
+10. `PATRIMONIO` variable cuantitativa continua que almacena el valor del patrimonio en libros de la empresa.
+11. `VENTAS` variable cuantitativa continua que almacena el valor de las ventas en libros de la empresa.
+12. `UTILIDAD` variable cuantitativa continua que almacena el valor de la utilidad en libros de la empresa.
 
 Como hemos dicho anteriormente los diagramas de barra se utilizan para variables cualitativas. Vamos a comenzar elaborando una tabla de frecuencias de las empresas por región.
 
@@ -904,10 +961,20 @@ ggplot(rank2018com, aes(x=REGIÓN,fill=TAMA)) +
 
 ```
 
+Se puede notar que en las leyendas ubicadas a la derecha del histograma, el título es *TAMA* porque la variable tiene ese nombre si quisierámos poner el nombre completo agregamos la opción `scale_fill_discrete(name="Tamaño")`
+
+```{r barras4, echo=TRUE, out.width = "60%",fig.cap="Gráfico de Barras de las empresas por Región y por Tamaño", fig.pos='h!'}
+
+ggplot(rank2018com, aes(x=REGIÓN,fill=TAMA)) + 
+  geom_bar(stat = "count",position = "dodge") +
+  scale_fill_discrete(name="Tamaño") + 
+  xlab("") + ylab("Frecuencia")
+
+```
 
 ### Diagramas de Caja y valores atípicos {#boxes}
 
-En la \@ref(fig:figura3) se pretendía mostrar la distribución de las ventas de acuerdo al tamaño de la empresa. Sin embargo el histograma no mostraba claramente la distribución de acuerdo al tamaño de la empresa. una alternativa es usar un diagrama de caja.
+En la figura \@ref(fig:figura3) se pretendía mostrar la distribución de las ventas de acuerdo al tamaño de la empresa. Sin embargo el histograma no mostraba claramente la distribución de acuerdo al tamaño de la empresa. una alternativa es usar un diagrama de caja.
 
 Un diagrama de caja está formado por 5 valores que lo resumen, estos 5 valores se muestran en la figura \@ref(fig:caja1). La distancia entre el primer y el tercer cuartil se la conoce como rango intercuartílico (IQR, por sus siglas en inglés). El límite superior es igual al tercer cuartil más 1.5 veces el rango intercuartílico, valores mayores a esta cantidad se consideran valores atípicos. Mientras que el límite inferior es igual al primer cuartil menos 1.5 veces el rango intercuartílico y valores menores a esta cantidad se consideran valores atípicos. 
 
@@ -948,6 +1015,56 @@ ggplot(subset(rank2018, TAMAÑO == "MICROEMPRESA"), aes(TAMAÑO, VENTAS/1000)) +
   geom_boxplot() + xlab("") +
   ylab("Ventas en Miles de Dólares") +theme_light()
 ```
+
+\newpage
+
+## Ejercicios
+
+0. Para realizar estos ejercicios se recomienda crear un proyecto llamado `EjerciciosCap1`. Una  vez creado el proyecto dentro de la carpeta del proyecto cargar los datos que se encuentran en <http://oswaldonavarrete.info/datos-libro/>
+
+1. El conjunto `RESERVAS0818.csv` contiene los valores de las reservas monetarias desde enero del 2008 hasta diciembre del 2018. El conjunto de datos tiene 11 observaciones y 13 variables, la primera variable es el año y las otras 12 corresponden a los meses del año. Los datos tienen un formato largo.
+
+    a. Cambiar los datos de formato largo a formato ancho, el nuevo conjunto de  datos debe llamarse `RESERVAS0818_L` las variables del conjunto de datos deben ser  `AÑO`, `MES` y `RESERVA`.
+    b. Usando convenientemente la funcón `arrange` muestre los tres años y meses con las reservas más altas.
+    c. Usando convenientemente la funcón `arrange` muestre los tres años y meses con las reservas más bajas.
+    d. Determine el promedio, mediana, moda y desviación muestral de las reservas por año.
+
+2. El conjunto `rankingconstruccion.csv` contiene los datos del año 2018 de las  empresas que se dedican al sector de la construcción. La revista Vistazo elabora cada año un ranking de las empresas por cada sector de la producción al que pertenecen las empresas y un ranking general. Investigue el uso de la función `top_n` y con la ayuda de esta función seleccione las primeras 500 empresas de acuerdo a la utilidad, almacene estos resultados en el un conjunto llamado `rank500_construccion` y de este conjunto de datos, realice los siguientes ejercicios:
+
+    a. Elabore una tabla de frecuencia con las utilidades de las empresas.
+    b. Elabore una tabla de frecuencia de las empresas de acuerdo al sector.
+    c. Elabore una talba de frecuencia con las ventas de las empresas.
+    d. Elabore una tabla de contingencia que relacione el tamaño de la empresa con la región a la que pertenece la empresa.
+    e. Construya un diagrama de barras de las empresas por tamaño
+    f. Construya un diagrama de barras de las empresas por tamaño de acuerdo a la región.
+    g. Determine las medidas de tendencia central de las ventas de acuerdo a la región, almacene los resultados en una tabla llamada `ventascomercio` y guarde sus resultados en una hoja de cálculo.
+    h. Determine los tres cuartiles de las utilidades de acuerdo al tipo de compañía,
+    i. Elabore el diagrama de caja de las utilidades
+    j. Elabore el diagrama de caja de las utilidades de acuerdo al tipo de compañía.
+    
+3. El conjunto de datos `bvg3.csv` contiene los precios de las acciones mensuales de 8 empresas que cotizan en la Bolsa de Valores de Guayaquil. El conjunto de datos tiene nueve variables, la primera variable es la fecha. Las otras variables son las 8 empresas. La variable `Fecha` contiene un valor  numérico, esto se debe a que los datos fueron procesados en Excel y al momento de guardar el archivo como `csv` las fechas se convirtieron a números. Cargue los datos a R y almacenelos en un conjunto de datos llamado `bvg`.
+
+    a. Para convertir los números a fechas se puede usar la función `as.Date` cuyo uso básico es  `as.Date(variable, origin ="1899-12-30")`. Convierta la variable fecha de número a una fecha válida. Investigue ¿por qué se utiliza como origen el 30 de diciembre de 1899?
+    b. Cree una variable llamada `Año` extrayendo el año de la variable `Fecha`. Esto se puede realizar con el código `bvg$Año = as.numeric(format(bvg$Fecha, "%Y"))`.
+    c. Cree una variable llamada `Mes` extrayendo el mes de la variable `Fecha`. Note que cuando extrae el mes el resultado es un número. Investigue como cambiar ese número al mes correspondiente.
+    d. Determine las medidas de tendencia central y dispersión de los precios de las acciones por empresa.
+    
+4. En el ejercicio 2 se elaboró el ranking de las empresas del sector construcción, la revista Vistazo publica además un ranking de las mejores 500 empresas de todos los sectores de acuerdo a su utilidad. Elabore el ranking de las 500 mejores empresas utilizando los conjuntos `rankingagricultura.csv`, `rankingcomercio.csv`, `rankingconstruccion.csv`, `rankinginmobiliaria.csv` y `rankingmanufactura.csv`. El flujo de trabajo recomendado para esta actividad es:
+
+    a. Cargar cada conjunto de datos por separado, almacenando cada conjunto en una variable que usted decida.
+    b. Unir los conjuntos de datos en un solo conjunto, para esto debe utilizar la función `rbind( )`. Investigue el uso de esta función y utilícela para formar un único conjunto de datos. 
+    c. Con ayuda de la función `top_n( )` seleccione las primeras 500 empresas de acuerdo a la utilidad. Guarde este ranking en un conjunto llamado `ranking2018todos`. Con el conjunto `ranking2018todos` se pide:
+        1. Calcular las medidas de tendencia central y dispersión por sector de las utilidades.
+        2. Determinar los deciles de las utilidades para todas las empresas.
+        3. Determinar los deciles de las utilidades por sector.
+        4. ELaborar tablas de contingencia relacionando el sector y el tamaño de las empresas.
+        5. ¿De qué ciudad son la mayoría de empresas del ranking? Elabore una tabla de frecuencia de las empresas por ciudad. 
+        6. ¿a qué sector productivo pertenecen la mayoría de empresas del ranking?
+        
+
+
+
+
 
 
 

@@ -159,12 +159,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8.1" data-path="tablas-de-frecuencia.html"><a href="tablas-de-frecuencia.html#variables-cualitativas"><i class="fa fa-check"></i><b>2.8.1</b> Variables Cualitativas</a></li>
 <li class="chapter" data-level="2.8.2" data-path="tablas-de-frecuencia.html"><a href="tablas-de-frecuencia.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.8.2</b> Variables Cuantitativas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>2.9</b> Tablas de Contingencia</a></li>
+<li class="chapter" data-level="2.9" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>2.9</b> Tablas de Contingencia</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html#las-funciones-spread-y-gather"><i class="fa fa-check"></i><b>2.9.1</b> Las funciones <code>spread</code> y <code>gather</code></a></li>
+</ul></li>
 <li class="chapter" data-level="2.10" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html"><i class="fa fa-check"></i><b>2.10</b> Gráficos y Visualización</a><ul>
 <li class="chapter" data-level="2.10.1" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#histogramas"><i class="fa fa-check"></i><b>2.10.1</b> Histogramas</a></li>
 <li class="chapter" data-level="2.10.2" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#diagrama-de-barras"><i class="fa fa-check"></i><b>2.10.2</b> Diagrama de barras</a></li>
 <li class="chapter" data-level="2.10.3" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#boxes"><i class="fa fa-check"></i><b>2.10.3</b> Diagramas de Caja y valores atípicos</a></li>
 </ul></li>
+<li class="chapter" data-level="2.11" data-path="ejercicios.html"><a href="ejercicios.html"><i class="fa fa-check"></i><b>2.11</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="distr.html"><a href="distr.html"><i class="fa fa-check"></i><b>3</b> Distribuciones de probabilidad</a><ul>
 <li class="chapter" data-level="3.1" data-path="variable-aleatoria-y-distribucion-de-probabilidad.html"><a href="variable-aleatoria-y-distribucion-de-probabilidad.html"><i class="fa fa-check"></i><b>3.1</b> Variable aleatoria y distribución de probabilidad</a></li>
@@ -202,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="pruebas-de-hipotesis-en-r.html"><a href="pruebas-de-hipotesis-en-r.html#para-la-diferencia-de-medias"><i class="fa fa-check"></i><b>4.4.3</b> Para la diferencia de medias</a></li>
 <li class="chapter" data-level="4.4.4" data-path="pruebas-de-hipotesis-en-r.html"><a href="pruebas-de-hipotesis-en-r.html#para-la-diferencia-de-proporciones"><i class="fa fa-check"></i><b>4.4.4</b> Para la diferencia de proporciones</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="ejercicios-1.html"><a href="ejercicios-1.html"><i class="fa fa-check"></i><b>4.5</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>5</b> Correlación y Regresión</a><ul>
 <li class="chapter" data-level="5.1" data-path="correl.html"><a href="correl.html"><i class="fa fa-check"></i><b>5.1</b> Coeficiente de Correlación</a></li>
@@ -281,14 +285,15 @@ Figura 2.5: Nuevo Proyecto. Paso 2
 Figura 2.6: Nuevo Proyecto. Paso 3
 </p>
 </div>
-<p>Finalmente se crea nuestro proyecto, la ventana de Rstudio ahora en la parte superior derecha muestra el nombre de nuestro proyecto. Tal como se aprecia en la figura <a href="primerR.html#fig:project4">2.7</a></p>
+<p>Finalmente se crea nuestro proyecto, la ventana de Rstudio ahora en la parte superior derecha muestra el nombre de nuestro proyecto. Tal como se aprecia en la figura <a href="primerR.html#fig:project4">2.7</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:project4"></span>
 <img src="project4.png" alt="Nuevo Proyecto. Paso Final" width="40%" />
 <p class="caption">
 Figura 2.7: Nuevo Proyecto. Paso Final
 </p>
 </div>
-
+<p>Dentro de este proyecto creamos los scripts que necesitemos para nuestro análisis de datos.
+</p>
 <p>En este primer ejercicio trabajaremos con el archivo <em>cap2_big4_size.csv</em>. Los datos serán guardados en una variable llamada <code>big4size</code>, usaremos la función <code>read.csv()</code> para leer los datos. La función <code>read.csv()</code> recibe las instrucciones <code>read.csv("archivo", header=T, sep=";",dec=",")</code>. La opción <code>"archivo"</code> indica el nombre del archivo, <code>header=T</code> o <code>header=F</code> permite indicar si las columnas tienen o no un encabezado que las identifique, <code>sep=";"</code> sirve para indicar cual es el separador presente en nuestro archivo en algunas ocasiones ocurre que un archivo de valores separado por coma en realidad tiene sus valores separados por un punto y cona esto generalmente ocurre cuando el sistema operativo utiliza, como en este caso, la coma como separador decimal y finalmente la opción <code>dec=","</code> sirve para indicar que el separador decimal es la coma.</p>
 <p>En R se puede acceder a la ayuda sobre las funciones, esto se hace escribiendo <code>?funcion</code> por ejemplo si queremos la ayuda de la función <code>read.csv</code> simplemente escribimos <code>?read.csv</code> en el panel ubicado en la parte inferior derecha se desplegará la ayuda de la función. Con la particularidad de que la ayuda se despliega en inglés lo que no debería ser problema para un buen investigador.</p>
 <p>El archivo que vamos a analizar contiene los activos, la utilidad, las ventas y el patrimonio de una muestra de empresas tomada de los registros de la Superintendencia de Compañías. Además en el conjunto de datos se indica si la empresa ha sido auditada por una de las 4 firmas auditoras consideradas las más grandes o también llamadas <em><em>Big Four</em></em>. En la <a href="primerR.html#tab:tabla1">2.1</a> se muestran las 10 primeras observaciones de nuestro conjunto de datos.</p>
@@ -391,6 +396,7 @@ Figura 2.7: Nuevo Proyecto. Paso Final
 <p>Sin más preámbulos, empecemos a trabajar. Recapitulando nuestro flujo de trabajo es:</p>
 <ol style="list-style-type: decimal">
 <li>Configurar el directorio de trabajo o crear un proyecto. Este paso ya fue realizado.</li>
+<li>Crear un script donde escribiremos todo el código de nuestro análisis de datos.</li>
 <li>Cargar el archivo indicado.</li>
 <li>Finalmente usamos la función <code>str()</code>, que nos permite obtener la descripción de la estructura de los datos.</li>
 </ol>

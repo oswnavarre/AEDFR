@@ -159,12 +159,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8.1" data-path="tablas-de-frecuencia.html"><a href="tablas-de-frecuencia.html#variables-cualitativas"><i class="fa fa-check"></i><b>2.8.1</b> Variables Cualitativas</a></li>
 <li class="chapter" data-level="2.8.2" data-path="tablas-de-frecuencia.html"><a href="tablas-de-frecuencia.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.8.2</b> Variables Cuantitativas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>2.9</b> Tablas de Contingencia</a></li>
+<li class="chapter" data-level="2.9" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>2.9</b> Tablas de Contingencia</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html#las-funciones-spread-y-gather"><i class="fa fa-check"></i><b>2.9.1</b> Las funciones <code>spread</code> y <code>gather</code></a></li>
+</ul></li>
 <li class="chapter" data-level="2.10" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html"><i class="fa fa-check"></i><b>2.10</b> Gráficos y Visualización</a><ul>
 <li class="chapter" data-level="2.10.1" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#histogramas"><i class="fa fa-check"></i><b>2.10.1</b> Histogramas</a></li>
 <li class="chapter" data-level="2.10.2" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#diagrama-de-barras"><i class="fa fa-check"></i><b>2.10.2</b> Diagrama de barras</a></li>
 <li class="chapter" data-level="2.10.3" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#boxes"><i class="fa fa-check"></i><b>2.10.3</b> Diagramas de Caja y valores atípicos</a></li>
 </ul></li>
+<li class="chapter" data-level="2.11" data-path="ejercicios.html"><a href="ejercicios.html"><i class="fa fa-check"></i><b>2.11</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="distr.html"><a href="distr.html"><i class="fa fa-check"></i><b>3</b> Distribuciones de probabilidad</a><ul>
 <li class="chapter" data-level="3.1" data-path="variable-aleatoria-y-distribucion-de-probabilidad.html"><a href="variable-aleatoria-y-distribucion-de-probabilidad.html"><i class="fa fa-check"></i><b>3.1</b> Variable aleatoria y distribución de probabilidad</a></li>
@@ -202,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="pruebas-de-hipotesis-en-r.html"><a href="pruebas-de-hipotesis-en-r.html#para-la-diferencia-de-medias"><i class="fa fa-check"></i><b>4.4.3</b> Para la diferencia de medias</a></li>
 <li class="chapter" data-level="4.4.4" data-path="pruebas-de-hipotesis-en-r.html"><a href="pruebas-de-hipotesis-en-r.html#para-la-diferencia-de-proporciones"><i class="fa fa-check"></i><b>4.4.4</b> Para la diferencia de proporciones</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="ejercicios-1.html"><a href="ejercicios-1.html"><i class="fa fa-check"></i><b>4.5</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>5</b> Correlación y Regresión</a><ul>
 <li class="chapter" data-level="5.1" data-path="correl.html"><a href="correl.html"><i class="fa fa-check"></i><b>5.1</b> Coeficiente de Correlación</a></li>
@@ -243,7 +247,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.9</span> Tablas de Contingencia</h2>
 <p>Una tabla de contingencia es una forma útil para examinar relaciones entre dos variables categóricas. Los valores en las celdas de una tabla de contingencia pueden ser de frecuencia absoluta o frecuencia relativa.</p>
 <p>Para ejemplificar la construcción de una tabla de contingencia vamos a trabajar con el archivo <code>Ranking2018Guayas.csv</code> que tiene información sobre 23457 empresas de la provincia del Guayas. Se analizará la relación entre la ciudad y el tamaño de las empresas.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rank2018 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Ranking2018Guayas.csv&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)
+<p>Para construir tablas de contingencia se utiliza la función <code>spread( )</code> del paquete <code>tidyr</code>. El uso básico de esta función es <code>spread(datos, clave,valor)</code> donde <code>clave</code> corresponde a las columnas que se usarán y <code>valor</code> al número que se incluirá en la tabla. En este caso escribimos <code>spread(TAMAÑO, n),</code> no indicamos los datos porque se hace uso del operador %&gt;% antes de la función <code>spread()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+rank2018 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Ranking2018Guayas.csv&quot;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)
 
 ciudad.tama =<span class="st"> </span>rank2018 <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(CIUDAD, TAMAÑO)<span class="op">%&gt;%</span>
@@ -998,6 +1004,66 @@ ciudad.tama =<span class="st"> </span>rank2018 <span class="op">%&gt;%</span><sp
 </tbody>
 </table>
 
+<div id="las-funciones-spread-y-gather" class="section level3">
+<h3><span class="header-section-number">2.9.1</span> Las funciones <code>spread</code> y <code>gather</code></h3>
+<p>En la sección anterior hicimos uso de la función <code>spread( )</code>. Esta función tiene una función complementaria llamada <code>gather</code>. Para comprender mejor el uso de estas funciones, vamos a usar un conjunto de datos llamado <code>IPC.csv</code>. En este conjunto de datos se encuentra el valor del <em>Índice de Precios al Consumidor</em> desde enero de 1995 hasta diciembre de 2018.</p>
+<pre class="sourceCode r"><code class="sourceCode r">IPC =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;IPC.csv&quot;</span>,<span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">dec=</span><span class="st">&quot;,&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>)
+<span class="kw">head</span>(IPC)</code></pre>
+<pre><code>##    AÑO  Ene.  Feb.  Mar.  Abr.  May.  Jun.  Jul.  Ago.  Sep.  Oct.  Nov.
+## 1 1995  5.37  5.43  5.54  5.68  5.79  5.86  5.90  5.97  6.12  6.19  6.29
+## 2 1996  6.55  6.72  6.92  7.11  7.09  7.20  7.32  7.47  7.65  7.77  7.94
+## 3 1997  8.56  8.86  8.98  9.17  9.31  9.44  9.63  9.76  9.99 10.17 10.31
+## 4 1998 10.93 11.42 11.74 12.25 12.47 12.83 12.93 13.10 13.76 14.65 14.95
+## 5 1999 15.55 15.96 18.12 19.12 19.29 19.63 20.23 20.34 20.70 21.56 22.93
+## 6 2000 27.68 30.46 32.77 36.11 37.97 39.99 40.94 41.49 43.02 44.18 45.14
+##    Dic.
+## 1  6.40
+## 2  8.04
+## 3 10.51
+## 4 15.07
+## 5 24.21
+## 6 46.25</code></pre>
+<p>Se puede observar que este conjunto tiene 24 observaciones una por cada año y 13 variables la primera variable es <code>AÑO</code> y las otras 12 variables corresponden a los meses del año. Supongamos que queremos transformar este conjunto <strong>ancho</strong> a un conjunto <strong>largo</strong> con solo tres variables <code>AÑO</code>, <code>MES</code> e <code>IPC</code>. en este caso usamos la función <code>gather</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">IPC2 =<span class="st"> </span>IPC <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;MES&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;IPC&quot;</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">13</span>)
+
+<span class="kw">head</span>(IPC2)</code></pre>
+<pre><code>##    AÑO  MES   IPC
+## 1 1995 Ene.  5.37
+## 2 1996 Ene.  6.55
+## 3 1997 Ene.  8.56
+## 4 1998 Ene. 10.93
+## 5 1999 Ene. 15.55
+## 6 2000 Ene. 27.68</code></pre>
+<p>Podemos observar que los nombres de las columnas que estaban de la columna 2 a la 13 ahora están como categorías de la variable mes y que los valores que antes estaban en estas columna ahora se almacenan en una variable llamada <code>ÌPC</code>.</p>
+<p>Si deseamos regresar al conjunto inicial utilizamos la función <code>spread()</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">IPC3 =<span class="st"> </span>IPC2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> <span class="st">&quot;MES&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;IPC&quot;</span>)
+
+<span class="kw">head</span>(IPC3)</code></pre>
+<pre><code>##    AÑO  Abr.  Ago.  Dic.  Ene.  Feb.  Jul.  Jun.  Mar.  May.  Nov.  Oct.
+## 1 1995  5.68  5.97  6.40  5.37  5.43  5.90  5.86  5.54  5.79  6.29  6.19
+## 2 1996  7.11  7.47  8.04  6.55  6.72  7.32  7.20  6.92  7.09  7.94  7.77
+## 3 1997  9.17  9.76 10.51  8.56  8.86  9.63  9.44  8.98  9.31 10.31 10.17
+## 4 1998 12.25 13.10 15.07 10.93 11.42 12.93 12.83 11.74 12.47 14.95 14.65
+## 5 1999 19.12 20.34 24.21 15.55 15.96 20.23 19.63 18.12 19.29 22.93 21.56
+## 6 2000 36.11 41.49 46.25 27.68 30.46 40.94 39.99 32.77 37.97 45.14 44.18
+##    Sep.
+## 1  6.12
+## 2  7.65
+## 3  9.99
+## 4 13.76
+## 5 20.70
+## 6 43.02</code></pre>
+<p>Podemos observar que el conjunto <code>IPC3</code> es igual al conjunto de datos inicial, con la diferencia que las columnas de los meses se han ordenado alfabeticamente. En secciones posteriores aprenderemos a trabajar con variables relacionadas a tiempo. En resumen la función <code>gather( )</code> transforma datos anchos a datos largos y <code>spread( )</code> transforma datos largos a datos anchos.</p>
+<div class="figure" style="text-align: center"><span id="fig:gatspr"></span>
+<img src="gat_spr.png" alt="Datos largos y datos anchos" width="50%" />
+<p class="caption">
+Figura 2.12: Datos largos y datos anchos
+</p>
+</div>
+
+</div>
 </div>
             </section>
 

@@ -162,7 +162,7 @@ Este libro no es una introducción a la estadística. En la presente obra se int
 
 En este texto se presentan, discuten y aplican los conceptos. La presentación de los conceptos es realizada pensando en un diálogo entre el autor y el lector, sin descuidar la formalidad de las expresiones matemáticas. Para la discusión y aplicación de los conceptos, se va mostrando al usuario como implementar el análisis estadístico en R.
 
-Para aprovechar al máximo este libro se recomienda tener a mano una computadora con R instalado, a fin de poder ir ejecutando los códigos que se muestran. Los scripts y los conjuntos de datos que se presentan pueden ser descargados de \url{https://github.com/oswnavarre/AEDFCR}
+Para aprovechar al máximo este libro se recomienda tener a mano una computadora con R instalado, a fin de poder ir ejecutando los códigos que se muestran. Los scripts y los conjuntos de datos que se presentan pueden ser descargados de \url{http://oswaldonavarrete.info/datos-libro/}
 
 Aunque la obra tiene un enfoque práctico, el lector no debe olvidar que aprender a usar R no implica saber estadística y que los programas estadísticos no brindan soluciones si el usuario no conoce los conceptos que deben ser aplicados.
 
@@ -317,7 +317,7 @@ Luego escogemos la ubicación de la carpeta donde reposan nuestros archivos dand
 \caption{Nuevo Proyecto. Paso 3}\label{fig:project3}
 \end{figure}
 
-Finalmente se crea nuestro proyecto, la ventana de Rstudio ahora en la parte superior derecha muestra el nombre de nuestro proyecto. Tal como se aprecia en la figura \ref{fig:project4}
+Finalmente se crea nuestro proyecto, la ventana de Rstudio ahora en la parte superior derecha muestra el nombre de nuestro proyecto. Tal como se aprecia en la figura \ref{fig:project4}.
 
 \begin{figure}[!h]
 
@@ -328,7 +328,8 @@ Finalmente se crea nuestro proyecto, la ventana de Rstudio ahora en la parte sup
 \caption{Nuevo Proyecto. Paso Final}\label{fig:project4}
 \end{figure}
 
-\newpage
+Dentro de este proyecto creamos los scripts que necesitemos para nuestro análisis de datos.
+\newpage 
 
 En este primer ejercicio trabajaremos con el archivo \emph{cap2\_big4\_size.csv}. Los datos serán guardados en una variable llamada \texttt{big4size}, usaremos la función \texttt{read.csv()} para leer los datos. La función \texttt{read.csv()} recibe las instrucciones \texttt{read.csv("archivo",\ header=T,\ sep=";",dec=",")}. La opción \texttt{"archivo"} indica el nombre del archivo, \texttt{header=T} o \texttt{header=F} permite indicar si las columnas tienen o no un encabezado que las identifique, \texttt{sep=";"} sirve para indicar cual es el separador presente en nuestro archivo en algunas ocasiones ocurre que un archivo de valores separado por coma en realidad tiene sus valores separados por un punto y cona esto generalmente ocurre cuando el sistema operativo utiliza, como en este caso, la coma como separador decimal y finalmente la opción \texttt{dec=","} sirve para indicar que el separador decimal es la coma.
 
@@ -368,6 +369,8 @@ Sin más preámbulos, empecemos a trabajar. Recapitulando nuestro flujo de traba
 \tightlist
 \item
   Configurar el directorio de trabajo o crear un proyecto. Este paso ya fue realizado.
+\item
+  Crear un script donde escribiremos todo el código de nuestro análisis de datos.
 \item
   Cargar el archivo indicado.
 \item
@@ -1120,8 +1123,11 @@ Una tabla de contingencia es una forma útil para examinar relaciones entre dos 
 
 Para ejemplificar la construcción de una tabla de contingencia vamos a trabajar con el archivo \texttt{Ranking2018Guayas.csv} que tiene información sobre 23457 empresas de la provincia del Guayas. Se analizará la relación entre la ciudad y el tamaño de las empresas.
 
+Para construir tablas de contingencia se utiliza la función \texttt{spread(\ )} del paquete \texttt{tidyr}. El uso básico de esta función es \texttt{spread(datos,\ clave,valor)} donde \texttt{clave} corresponde a las columnas que se usarán y \texttt{valor} al número que se incluirá en la tabla. En este caso escribimos \texttt{spread(TAMAÑO,\ n),} no indicamos los datos porque se hace uso del operador \%\textgreater{}\% antes de la función \texttt{spread()}.
+
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyr)}
 \NormalTok{rank2018 =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Ranking2018Guayas.csv"}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{sep=}\StringTok{";"}\NormalTok{,}\DataTypeTok{dec=}\StringTok{","}\NormalTok{)}
 
 \NormalTok{ciudad.tama =}\StringTok{ }\NormalTok{rank2018 }\OperatorTok{%>%}\StringTok{ }
@@ -1320,6 +1326,99 @@ SUCURSAL EXTRANJERA & 0.04 & 0.03 & 0.17 & 0.04\tabularnewline
 
 \newpage
 
+\hypertarget{las-funciones-spread-y-gather}{%
+\subsection{\texorpdfstring{Las funciones \texttt{spread} y \texttt{gather}}{Las funciones spread y gather}}\label{las-funciones-spread-y-gather}}
+
+En la sección anterior hicimos uso de la función \texttt{spread(\ )}. Esta función tiene una función complementaria llamada \texttt{gather}. Para comprender mejor el uso de estas funciones, vamos a usar un conjunto de datos llamado \texttt{IPC.csv}. En este conjunto de datos se encuentra el valor del \emph{Índice de Precios al Consumidor} desde enero de 1995 hasta diciembre de 2018.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IPC =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"IPC.csv"}\NormalTok{,}\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{dec=}\StringTok{","}\NormalTok{, }\DataTypeTok{sep =} \StringTok{";"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(IPC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    AÑO  Ene.  Feb.  Mar.  Abr.  May.  Jun.  Jul.  Ago.  Sep.  Oct.  Nov.
+## 1 1995  5.37  5.43  5.54  5.68  5.79  5.86  5.90  5.97  6.12  6.19  6.29
+## 2 1996  6.55  6.72  6.92  7.11  7.09  7.20  7.32  7.47  7.65  7.77  7.94
+## 3 1997  8.56  8.86  8.98  9.17  9.31  9.44  9.63  9.76  9.99 10.17 10.31
+## 4 1998 10.93 11.42 11.74 12.25 12.47 12.83 12.93 13.10 13.76 14.65 14.95
+## 5 1999 15.55 15.96 18.12 19.12 19.29 19.63 20.23 20.34 20.70 21.56 22.93
+## 6 2000 27.68 30.46 32.77 36.11 37.97 39.99 40.94 41.49 43.02 44.18 45.14
+##    Dic.
+## 1  6.40
+## 2  8.04
+## 3 10.51
+## 4 15.07
+## 5 24.21
+## 6 46.25
+\end{verbatim}
+
+Se puede observar que este conjunto tiene 24 observaciones una por cada año y 13 variables la primera variable es \texttt{AÑO} y las otras 12 variables corresponden a los meses del año. Supongamos que queremos transformar este conjunto \textbf{ancho} a un conjunto \textbf{largo} con solo tres variables \texttt{AÑO}, \texttt{MES} e \texttt{IPC}. en este caso usamos la función \texttt{gather}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IPC2 =}\StringTok{ }\NormalTok{IPC }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =} \StringTok{"MES"}\NormalTok{, }\DataTypeTok{value =} \StringTok{"IPC"}\NormalTok{, }\DecValTok{2}\OperatorTok{:}\DecValTok{13}\NormalTok{)}
+
+\KeywordTok{head}\NormalTok{(IPC2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    AÑO  MES   IPC
+## 1 1995 Ene.  5.37
+## 2 1996 Ene.  6.55
+## 3 1997 Ene.  8.56
+## 4 1998 Ene. 10.93
+## 5 1999 Ene. 15.55
+## 6 2000 Ene. 27.68
+\end{verbatim}
+
+Podemos observar que los nombres de las columnas que estaban de la columna 2 a la 13 ahora están como categorías de la variable mes y que los valores que antes estaban en estas columna ahora se almacenan en una variable llamada \texttt{ÌPC}.
+
+Si deseamos regresar al conjunto inicial utilizamos la función \texttt{spread()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IPC3 =}\StringTok{ }\NormalTok{IPC2 }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{spread}\NormalTok{(}\DataTypeTok{key =} \StringTok{"MES"}\NormalTok{, }\DataTypeTok{value =} \StringTok{"IPC"}\NormalTok{)}
+
+\KeywordTok{head}\NormalTok{(IPC3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    AÑO  Abr.  Ago.  Dic.  Ene.  Feb.  Jul.  Jun.  Mar.  May.  Nov.  Oct.
+## 1 1995  5.68  5.97  6.40  5.37  5.43  5.90  5.86  5.54  5.79  6.29  6.19
+## 2 1996  7.11  7.47  8.04  6.55  6.72  7.32  7.20  6.92  7.09  7.94  7.77
+## 3 1997  9.17  9.76 10.51  8.56  8.86  9.63  9.44  8.98  9.31 10.31 10.17
+## 4 1998 12.25 13.10 15.07 10.93 11.42 12.93 12.83 11.74 12.47 14.95 14.65
+## 5 1999 19.12 20.34 24.21 15.55 15.96 20.23 19.63 18.12 19.29 22.93 21.56
+## 6 2000 36.11 41.49 46.25 27.68 30.46 40.94 39.99 32.77 37.97 45.14 44.18
+##    Sep.
+## 1  6.12
+## 2  7.65
+## 3  9.99
+## 4 13.76
+## 5 20.70
+## 6 43.02
+\end{verbatim}
+
+Podemos observar que el conjunto \texttt{IPC3} es igual al conjunto de datos inicial, con la diferencia que las columnas de los meses se han ordenado alfabeticamente. En secciones posteriores aprenderemos a trabajar con variables relacionadas a tiempo. En resumen la función \texttt{gather(\ )} transforma datos anchos a datos largos y \texttt{spread(\ )} transforma datos largos a datos anchos.
+
+\begin{figure}[!h]
+
+{\centering \includegraphics[width=0.5\linewidth]{gat_spr} 
+
+}
+
+\caption{Datos largos y datos anchos}\label{fig:gatspr}
+\end{figure}
+
+\newpage
+
 \hypertarget{graficos-y-visualizacion}{%
 \section{Gráficos y Visualización}\label{graficos-y-visualizacion}}
 
@@ -1377,7 +1476,7 @@ Usando el archivo \texttt{Ranking2018Guayas.csv}, vamos ahora a hacer el histogr
 \StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.3}\NormalTok{, }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{,}\DataTypeTok{bins =} \DecValTok{20}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{), }
         \DataTypeTok{panel.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill=}\StringTok{"white"}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Ventas en Miles"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{) }
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Ventas en Millones"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1390,7 +1489,29 @@ Usando el archivo \texttt{Ranking2018Guayas.csv}, vamos ahora a hacer el histogr
 \caption{Histograma de las Ventas de Acuerdo al Tamaño de la empresa}\label{fig:figura3}
 \end{figure}
 
-Se puede observar en la \ref{fig:figura3} que algunas empresas medianas tienen mayores ventas que el resto de empresas. Una mejor forma de comparar la distribución de una variable de acuerdo a otra variable es usar los diagramas de caja que serán discutidos en profundidad en la sección \ref{boxes}.
+Se puede observar en la \ref{fig:figura3} que algunas empresas grandes tienen mayores ventas que el resto de empresas. Una mejor forma de comparar la distribución de una variable de acuerdo a otra variable es usar los diagramas de caja que serán discutidos en profundidad en la sección \ref{boxes}.
+
+Si se desea ver los histogramas de acuerdo al tamaño de empresa se puede separar los histogramas con la opción \texttt{facet\_grid(.\ \textasciitilde{}\ VARIABLE)}, dentro de esta opción se escribe el nombre de la variable por la que se quiere separar el gráfico, en este caso se escribe \texttt{facet\_grid(.\ \textasciitilde{}\ TAMAÑO)}. Un ejemplo se visualiza en la figura \ref{fig:histfacet}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rank2018, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{VENTAS}\OperatorTok{/}\DecValTok{1000000}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.3}\NormalTok{, }\DataTypeTok{color=}\StringTok{"black"}\NormalTok{,}\DataTypeTok{bins =} \DecValTok{10}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{1}\NormalTok{), }
+        \DataTypeTok{panel.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill=}\StringTok{"white"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Ventas en Miles"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(. }\OperatorTok{~}\StringTok{ }\NormalTok{TAMAÑO)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[h!]
+
+{\centering \includegraphics[width=0.6\linewidth]{AEDFR_files/figure-latex/histfacet-1} 
+
+}
+
+\caption{Histograma de las Ventas de Acuerdo al Tamaño de la empresa}\label{fig:histfacet}
+\end{figure}
 
 \hypertarget{simetria-y-sesgo}{%
 \subsubsection{Simetría y sesgo}\label{simetria-y-sesgo}}
@@ -1444,18 +1565,18 @@ Para ejemplificar la elaboración de diagrama de barras, vamos a trabajar con el
 
 \begin{verbatim}
 ## 'data.frame':    507 obs. of  12 variables:
-##  $ EXPEDIENTE: int  11069 103998 23140 165341 49377 93937 64400 134199 13963 95267 ...
-##  $ TIPO      : Factor w/ 3 levels "ANÓNIMA","RESPONSABILIDAD LIMITADA",..: 1 1 2 1 1 2 1 1 2 2 ...
-##  $ ACTIVIDAD : Factor w/ 112 levels "G4510.01","G4520.01",..: 69 69 71 69 42 1 4 26 60 76 ...
-##  $ REGIÓN    : Factor w/ 4 levels "COSTA","GALAPAGOS",..: 4 1 1 1 4 4 4 1 4 4 ...
-##  $ PROVINCIA : Factor w/ 16 levels "AZUAY","BOLIVAR",..: 12 7 5 7 12 14 12 7 12 1 ...
-##  $ TAMA      : Factor w/ 4 levels "GRANDE","MEDIANA",..: 1 1 1 1 1 1 1 1 2 1 ...
-##  $ SECTOR    : Factor w/ 2 levels "MERCADO DE VALORES",..: 2 2 2 2 2 1 2 2 2 2 ...
-##  $ EMPLEADOS : int  560 145 65 108 65 84 127 45 72 20 ...
-##  $ ACTIVO    : num  19013933 16498975 13759911 13015775 12664280 ...
-##  $ PATRIMONIO: num  5441046 11084842 1854108 4353938 4547432 ...
-##  $ VENTAS    : num  27523262 54939461 16703973 20409277 19232071 ...
-##  $ UTILIDAD  : num  2935434 1180875 229199 81757 -900404 ...
+##  $ EXPEDIENTE: int  103998 93937 11069 64400 165341 49377 23140 95267 134199 139976 ...
+##  $ TIPO      : Factor w/ 3 levels "ANÓNIMA","RESPONSABILIDAD LIMITADA",..: 1 2 1 1 1 1 2 2 1 3 ...
+##  $ ACTIVIDAD : Factor w/ 112 levels "G4510.01","G4520.01",..: 69 1 69 4 69 42 71 76 26 64 ...
+##  $ REGIÓN    : Factor w/ 4 levels "COSTA","GALAPAGOS",..: 1 4 4 4 1 4 1 4 1 4 ...
+##  $ PROVINCIA : Factor w/ 16 levels "AZUAY","BOLIVAR",..: 7 14 12 12 7 12 5 1 7 12 ...
+##  $ TAMA      : Factor w/ 4 levels "GRANDE","MEDIANA",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ SECTOR    : Factor w/ 2 levels "MERCADO DE VALORES",..: 2 1 2 2 2 2 2 2 2 2 ...
+##  $ EMPLEADOS : int  145 84 560 127 108 65 65 20 45 4 ...
+##  $ ACTIVO    : num  16498975 11244874 19013933 9995738 13015775 ...
+##  $ PATRIMONIO: num  11084842 4368086 5441046 5025093 4353938 ...
+##  $ VENTAS    : num  54939461 29561928 27523262 20630697 20409277 ...
+##  $ UTILIDAD  : num  1180875 596397 2935434 333168 81757 ...
 \end{verbatim}
 
 El conjunto de datos tiene 507 observaciones con 12 variables. Las variables presentes en este conjunto de datos son:
@@ -1482,11 +1603,11 @@ El conjunto de datos tiene 507 observaciones con 12 variables. Las variables pre
 \item
   \texttt{ACTIVO} variable cuantitativa continua que almacena el valor de los activos en libros de la empresa.
 \item
-  \texttt{PATRIMONIO} varaible cuantitativa continua que almacena el valor del patrimonio en libros de la empresa.
+  \texttt{PATRIMONIO} variable cuantitativa continua que almacena el valor del patrimonio en libros de la empresa.
 \item
-  \texttt{VENTAS} varaible cuantitativa continua que almacena el valor de las ventas en libros de la empresa.
+  \texttt{VENTAS} variable cuantitativa continua que almacena el valor de las ventas en libros de la empresa.
 \item
-  \texttt{UTILIDAD} varaible cuantitativa continua que almacena el valor de la utilidad en libros de la empresa.
+  \texttt{UTILIDAD} variable cuantitativa continua que almacena el valor de la utilidad en libros de la empresa.
 \end{enumerate}
 
 Como hemos dicho anteriormente los diagramas de barra se utilizan para variables cualitativas. Vamos a comenzar elaborando una tabla de frecuencias de las empresas por región.
@@ -1618,10 +1739,30 @@ Para elaborar el gráfico agregamos la opción \texttt{fill\ =\ TAMA} junto a \t
 \caption{Gráfico de Barras de las empresas por Región y por Tamaño}\label{fig:barras3}
 \end{figure}
 
+Se puede notar que en las leyendas ubicadas a la derecha del histograma, el título es \emph{TAMA} porque la variable tiene ese nombre si quisierámos poner el nombre completo agregamos la opción \texttt{scale\_fill\_discrete(name="Tamaño")}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(rank2018com, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{REGIÓN,}\DataTypeTok{fill=}\NormalTok{TAMA)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"count"}\NormalTok{,}\DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_fill_discrete}\NormalTok{(}\DataTypeTok{name=}\StringTok{"Tamaño"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{""}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[h!]
+
+{\centering \includegraphics[width=0.6\linewidth]{AEDFR_files/figure-latex/barras4-1} 
+
+}
+
+\caption{Gráfico de Barras de las empresas por Región y por Tamaño}\label{fig:barras4}
+\end{figure}
+
 \hypertarget{boxes}{%
 \subsection{Diagramas de Caja y valores atípicos}\label{boxes}}
 
-En la \ref{fig:figura3} se pretendía mostrar la distribución de las ventas de acuerdo al tamaño de la empresa. Sin embargo el histograma no mostraba claramente la distribución de acuerdo al tamaño de la empresa. una alternativa es usar un diagrama de caja.
+En la figura \ref{fig:figura3} se pretendía mostrar la distribución de las ventas de acuerdo al tamaño de la empresa. Sin embargo el histograma no mostraba claramente la distribución de acuerdo al tamaño de la empresa. una alternativa es usar un diagrama de caja.
 
 Un diagrama de caja está formado por 5 valores que lo resumen, estos 5 valores se muestran en la figura \ref{fig:caja1}. La distancia entre el primer y el tercer cuartil se la conoce como rango intercuartílico (IQR, por sus siglas en inglés). El límite superior es igual al tercer cuartil más 1.5 veces el rango intercuartílico, valores mayores a esta cantidad se consideran valores atípicos. Mientras que el límite inferior es igual al primer cuartil menos 1.5 veces el rango intercuartílico y valores menores a esta cantidad se consideran valores atípicos.
 
@@ -1686,6 +1827,105 @@ Si se quisiera analizar con mayor detalle las microempresas se podría seleccion
 
 \caption{Diagrama de Caja de las Ventas de las Microempresas}\label{fig:figura5}
 \end{figure}
+
+\newpage
+
+\hypertarget{ejercicios}{%
+\section{Ejercicios}\label{ejercicios}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\item
+  Para realizar estos ejercicios se recomienda crear un proyecto llamado \texttt{EjerciciosCap1}. Una vez creado el proyecto dentro de la carpeta del proyecto cargar los datos que se encuentran en \url{http://oswaldonavarrete.info/datos-libro/}
+\item
+  El conjunto \texttt{RESERVAS0818.csv} contiene los valores de las reservas monetarias desde enero del 2008 hasta diciembre del 2018. El conjunto de datos tiene 11 observaciones y 13 variables, la primera variable es el año y las otras 12 corresponden a los meses del año. Los datos tienen un formato largo.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Cambiar los datos de formato largo a formato ancho, el nuevo conjunto de datos debe llamarse \texttt{RESERVAS0818\_L} las variables del conjunto de datos deben ser \texttt{AÑO}, \texttt{MES} y \texttt{RESERVA}.
+  \item
+    Usando convenientemente la funcón \texttt{arrange} muestre los tres años y meses con las reservas más altas.
+  \item
+    Usando convenientemente la funcón \texttt{arrange} muestre los tres años y meses con las reservas más bajas.
+  \item
+    Determine el promedio, mediana, moda y desviación muestral de las reservas por año.
+  \end{enumerate}
+\item
+  El conjunto \texttt{rankingconstruccion.csv} contiene los datos del año 2018 de las empresas que se dedican al sector de la construcción. La revista Vistazo elabora cada año un ranking de las empresas por cada sector de la producción al que pertenecen las empresas y un ranking general. Investigue el uso de la función \texttt{top\_n} y con la ayuda de esta función seleccione las primeras 500 empresas de acuerdo a la utilidad, almacene estos resultados en el un conjunto llamado \texttt{rank500\_construccion} y de este conjunto de datos, realice los siguientes ejercicios:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Elabore una tabla de frecuencia con las utilidades de las empresas.
+  \item
+    Elabore una tabla de frecuencia de las empresas de acuerdo al sector.
+  \item
+    Elabore una talba de frecuencia con las ventas de las empresas.
+  \item
+    Elabore una tabla de contingencia que relacione el tamaño de la empresa con la región a la que pertenece la empresa.
+  \item
+    Construya un diagrama de barras de las empresas por tamaño
+  \item
+    Construya un diagrama de barras de las empresas por tamaño de acuerdo a la región.
+  \item
+    Determine las medidas de tendencia central de las ventas de acuerdo a la región, almacene los resultados en una tabla llamada \texttt{ventascomercio} y guarde sus resultados en una hoja de cálculo.
+  \item
+    Determine los tres cuartiles de las utilidades de acuerdo al tipo de compañía,
+  \item
+    Elabore el diagrama de caja de las utilidades
+  \item
+    Elabore el diagrama de caja de las utilidades de acuerdo al tipo de compañía.
+  \end{enumerate}
+\item
+  El conjunto de datos \texttt{bvg3.csv} contiene los precios de las acciones mensuales de 8 empresas que cotizan en la Bolsa de Valores de Guayaquil. El conjunto de datos tiene nueve variables, la primera variable es la fecha. Las otras variables son las 8 empresas. La variable \texttt{Fecha} contiene un valor numérico, esto se debe a que los datos fueron procesados en Excel y al momento de guardar el archivo como \texttt{csv} las fechas se convirtieron a números. Cargue los datos a R y almacenelos en un conjunto de datos llamado \texttt{bvg}.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Para convertir los números a fechas se puede usar la función \texttt{as.Date} cuyo uso básico es \texttt{as.Date(variable,\ origin\ ="1899-12-30")}. Convierta la variable fecha de número a una fecha válida. Investigue ¿por qué se utiliza como origen el 30 de diciembre de 1899?
+  \item
+    Cree una variable llamada \texttt{Año} extrayendo el año de la variable \texttt{Fecha}. Esto se puede realizar con el código \texttt{bvg\$Año\ =\ as.numeric(format(bvg\$Fecha,\ "\%Y"))}.
+  \item
+    Cree una variable llamada \texttt{Mes} extrayendo el mes de la variable \texttt{Fecha}. Note que cuando extrae el mes el resultado es un número. Investigue como cambiar ese número al mes correspondiente.
+  \item
+    Determine las medidas de tendencia central y dispersión de los precios de las acciones por empresa.
+  \end{enumerate}
+\item
+  En el ejercicio 2 se elaboró el ranking de las empresas del sector construcción, la revista Vistazo publica además un ranking de las mejores 500 empresas de todos los sectores de acuerdo a su utilidad. Elabore el ranking de las 500 mejores empresas utilizando los conjuntos \texttt{rankingagricultura.csv}, \texttt{rankingcomercio.csv}, \texttt{rankingconstruccion.csv}, \texttt{rankinginmobiliaria.csv} y \texttt{rankingmanufactura.csv}. El flujo de trabajo recomendado para esta actividad es:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Cargar cada conjunto de datos por separado, almacenando cada conjunto en una variable que usted decida.
+  \item
+    Unir los conjuntos de datos en un solo conjunto, para esto debe utilizar la función \texttt{rbind(\ )}. Investigue el uso de esta función y utilícela para formar un único conjunto de datos.
+  \item
+    Con ayuda de la función \texttt{top\_n(\ )} seleccione las primeras 500 empresas de acuerdo a la utilidad. Guarde este ranking en un conjunto llamado \texttt{ranking2018todos}. Con el conjunto \texttt{ranking2018todos} se pide:
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      Calcular las medidas de tendencia central y dispersión por sector de las utilidades.
+    \item
+      Determinar los deciles de las utilidades para todas las empresas.
+    \item
+      Determinar los deciles de las utilidades por sector.
+    \item
+      ELaborar tablas de contingencia relacionando el sector y el tamaño de las empresas.
+    \item
+      ¿De qué ciudad son la mayoría de empresas del ranking? Elabore una tabla de frecuencia de las empresas por ciudad.
+    \item
+      ¿a qué sector productivo pertenecen la mayoría de empresas del ranking?
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
 
 \hypertarget{distr}{%
 \chapter{Distribuciones de probabilidad}\label{distr}}
@@ -2899,13 +3139,93 @@ De acuerdo a los resultados obtenidos, el valor \(p\) nos sugiere no rechazar la
 \hypertarget{para-la-proporcion-1}{%
 \subsection{Para la proporción}\label{para-la-proporcion-1}}
 
+Supongamos que se quiere probar que más de la mitad de las compañías son microempresas. Es decir en términos matemáticos se afirma que la proporción de compañías catalogadas como microempresas es mayor a \(0.50\). Las hipótesis nula y alternativa serían:
+
+\begin{equation} 
+\begin{cases} 
+H_0: \pi \leq 0.50 \\ 
+H_1: \pi > 0.50
+\end{cases} 
+\end{equation}
+
+Para realizar pruebas de hipótesis para la proporción utilizamos la función \texttt{prop.test()}, con respecto a los intervalos de confianza agregamos las opciones:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{p\ =\ NULL} donde indicamos el valor de la proporción hipotética y
+\item
+  \texttt{alternative\ =\ c("two.sided",\ "less",\ "greater")} para señalar la hipotésis alternativa.
+\end{itemize}
+
+La prueba de hipótesis con una significancia del \(5\%\) es decir una confianza del \(95\)\%, en \texttt{n} almacenamos el total de datos y en \texttt{x1} el total de microempresas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n =}\StringTok{ }\KeywordTok{nrow}\NormalTok{(rank18com)}
+\NormalTok{x1 =}\StringTok{ }\KeywordTok{length}\NormalTok{(act.Micro)}
+\KeywordTok{prop.test}\NormalTok{(x1, n, }\DataTypeTok{p =} \FloatTok{0.50}\NormalTok{, }\DataTypeTok{alternative =} \StringTok{"greater"}\NormalTok{,  }\DataTypeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  1-sample proportions test with continuity correction
+## 
+## data:  x1 out of n, null probability 0.5
+## X-squared = 61.097, df = 1, p-value = 2.717e-15
+## alternative hypothesis: true p is greater than 0.5
+## 95 percent confidence interval:
+##  0.6384734 1.0000000
+## sample estimates:
+##         p 
+## 0.6745562
+\end{verbatim}
+
+De acuerdo al valor \(p\) obtenido se concluye que hay suficiente evidencia estadística para rechazar la hipótesis nula, es decir que más de la mitad de las compañías es catalogada como microempresa.
+
+Ahora, imaginemos que deseamos probar la hipótesis de que el porcentaje de empresas catalogadas como pequeñas es menor al 25\%, esta hipótesis se desea probar con una significancia del 2\%. Las hipótesis nula y alternativa serían ahora.
+
+\begin{equation} 
+\begin{cases} 
+H_0: \pi \geq 0.25 \\ 
+H_1: \pi < 0.25
+\end{cases} 
+\end{equation}
+
+Para realizar la prueba de hipótesis en R, en la opción \texttt{alternative} sería \texttt{"less"} y \texttt{p} debemos configurarlo como \texttt{p=0.25} el nivel de confianza sería 98\%
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n =}\StringTok{ }\KeywordTok{nrow}\NormalTok{(rank18com)}
+\NormalTok{x2 =}\StringTok{ }\KeywordTok{length}\NormalTok{(act.Peq)}
+\KeywordTok{prop.test}\NormalTok{(x2, n, }\DataTypeTok{p =} \FloatTok{0.25}\NormalTok{, }\DataTypeTok{alternative =} \StringTok{"less"}\NormalTok{,  }\DataTypeTok{conf.level =} \FloatTok{0.98}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  1-sample proportions test with continuity correction
+## 
+## data:  x2 out of n, null probability 0.25
+## X-squared = 0.079553, df = 1, p-value = 0.611
+## alternative hypothesis: true p is less than 0.25
+## 98 percent confidence interval:
+##  0.0000000 0.2991607
+## sample estimates:
+##         p 
+## 0.2564103
+\end{verbatim}
+
+De acuerdo al valor \(p\) obtenido se concluye que hay suficiente evidencia estadística para no rechazar la hipótesis nula. Es decir que la proporción de compañías catalogadas como pequeñas es mayor o igual a \(0.25\)
+
 \hypertarget{para-la-diferencia-de-medias}{%
 \subsection{Para la diferencia de medias}\label{para-la-diferencia-de-medias}}
 
 \hypertarget{sigma_1-y-sigma_2-conocidas-1}{%
 \subsubsection{\texorpdfstring{\(\sigma_1\) y \(\sigma_2\) conocidas}{\textbackslash{}sigma\_1 y \textbackslash{}sigma\_2 conocidas}}\label{sigma_1-y-sigma_2-conocidas-1}}
 
-Supongamos que se desea probar que el promedio de los activos de las empresas pequeñas es mayor que el promedio de los activos de las microempresas y se asume que se conocen las desviaciones poblacionales. Como ya sabemos esta prueba se realiza con la función \texttt{z.test(\ )}. Supongamos que las empresas pequeñas son el grupo 1 y las microempresas el grupo 2. Las hipótesis nula y alternativa serían.
+Supongamos que se desea probar que el promedio de los activos de las empresas pequeñas es mayor que el promedio de los activos de las microempresas y se asume que se conocen las desviaciones poblacionales. Como ya sabemos esta prueba se realiza con la función \texttt{z.test(\ )}. Vamos a establecer que las empresas pequeñas son el grupo 1 y las microempresas el grupo 2. Las hipótesis nula y alternativa serían.
 
 \begin{equation} 
 \begin{cases} 
@@ -3012,6 +3332,11 @@ De acuerdo al valor \(p\) obtenido, las conclusiones son iguales a cuando se asu
 
 \hypertarget{para-la-diferencia-de-proporciones}{%
 \subsection{Para la diferencia de proporciones}\label{para-la-diferencia-de-proporciones}}
+
+\newpage
+
+\hypertarget{ejercicios-1}{%
+\section{Ejercicios}\label{ejercicios-1}}
 
 \hypertarget{methods}{%
 \chapter{Correlación y Regresión}\label{methods}}

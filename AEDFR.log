@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.5.20)  27 MAY 2019 14:34
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7000 64-bit) (preloaded format=xelatex 2019.5.20)  31 MAY 2019 16:36
 entering extended mode
 **./AEDFR.tex
 (AEDFR.tex
@@ -927,7 +927,10 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ("C:\Users\DELL\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-msb.cf
 g"
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) [3] [4])
+) [3]
+Underfull \vbox (badness 1412) has occurred while \output is active []
+
+[4])
 \tf@toc=\write5
 \openout5 = `AEDFR.toc'.
 
@@ -984,7 +987,7 @@ File: deciles.png Graphic file (type bmp)
 File: AEDFR_files/figure-latex/rnl1-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/rnl1-1.pdf>
 [22] [23] [24] [25] [26]
-Underfull \hbox (badness 1406) in paragraph at lines 1121--1122
+Underfull \hbox (badness 1406) in paragraph at lines 1124--1125
 []\TU/lmr/m/n/10 Para ejemplificar la construcción de una tabla de contingencia
  vamos a trabajar con el archivo
  []
@@ -996,6 +999,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [29] [30]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1330.
+[31]
+File: gat_spr.png Graphic file (type bmp)
+<gat_spr.png>
+[32]
 File: AEDFR_files/figure-latex/figura1-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/figura1-1.pdf>
 File: AEDFR_files/figure-latex/figura2-1.pdf Graphic file (type pdf)
@@ -1003,47 +1012,73 @@ File: AEDFR_files/figure-latex/figura2-1.pdf Graphic file (type pdf)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[31]
+[33]
 File: AEDFR_files/figure-latex/figura3-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/figura3-1.pdf>
 
 Underfull \vbox (badness 7221) has occurred while \output is active []
 
-[32]
+[34]
+File: AEDFR_files/figure-latex/histfacet-1.pdf Graphic file (type pdf)
+<use AEDFR_files/figure-latex/histfacet-1.pdf>
 File: AEDFR_files/figure-latex/sime1-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/sime1-1.pdf>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 File: AEDFR_files/figure-latex/sesgoright-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/sesgoright-1.pdf>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 File: AEDFR_files/figure-latex/sesgoleft-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/sesgoleft-1.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[33]
-Overfull \hbox (60.49498pt too wide) in paragraph at lines 1459--1459
+[35]
+
+LaTeX Warning: Text page 36 contains only floats.
+
+[36]
+Overfull \hbox (2.74498pt too wide) in paragraph at lines 1580--1580
+[]\TU/lmtt/m/n/10 ##  $ EXPEDIENTE: int  103998 93937 11069 64400 165341 49377 
+23140 95267 134199 139976 ...[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1580--1580
 []\TU/lmtt/m/n/10 ##  $ TIPO      : Factor w/ 3 levels "ANÓNIMA","RESPONSABILID
-AD LIMITADA",..: 1 1 2 1 1 2 1 1 2 2 ...[] 
+AD LIMITADA",..: 1 2 1 1 1 1 2 2 1 3 ...[] 
  []
 
 
-Overfull \hbox (34.24498pt too wide) in paragraph at lines 1459--1459
+Overfull \hbox (34.24498pt too wide) in paragraph at lines 1580--1580
 []\TU/lmtt/m/n/10 ##  $ ACTIVIDAD : Factor w/ 112 levels "G4510.01","G4520.01",
-..: 69 69 71 69 42 1 4 26 60 76 ...[] 
+..: 69 1 69 4 69 42 71 76 26 64 ...[] 
  []
 
-[34]
+[37]
 File: AEDFR_files/figure-latex/barras1-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/barras1-1.pdf>
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[35]
+[38]
 File: AEDFR_files/figure-latex/barras2-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/barras2-1.pdf>
-[36]
+[39]
 File: AEDFR_files/figure-latex/barras3-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/barras3-1.pdf>
-[37]
+
+Underfull \hbox (badness 1365) in paragraph at lines 1742--1743
+\TU/lmr/m/n/10 que la variable tiene ese nombre si quisierámos poner el nombre 
+completo agregamos la opción
+ []
+
+File: AEDFR_files/figure-latex/barras4-1.pdf Graphic file (type pdf)
+<use AEDFR_files/figure-latex/barras4-1.pdf>
+
+Underfull \vbox (badness 1817) has occurred while \output is active []
+
+[40]
 File: boxplot3.png Graphic file (type bmp)
 <boxplot3.png>
 File: AEDFR_files/figure-latex/figura4-1.pdf Graphic file (type pdf)
@@ -1051,16 +1086,21 @@ File: AEDFR_files/figure-latex/figura4-1.pdf Graphic file (type pdf)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[41]
 File: AEDFR_files/figure-latex/figura5-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/figura5-1.pdf>
+[42] [43]
+Overfull \hbox (32.54721pt too wide) in paragraph at lines 1899--1900
+\TU/lmtt/m/n/10 rankingcomercio.csv\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 rankingcons
+truccion.csv\TU/lmr/m/n/10 , \TU/lmtt/m/n/10 rankinginmobiliaria.csv \TU/lmr/m/
+n/10 y \TU/lmtt/m/n/10 rankingmanufactura.csv\TU/lmr/m/n/10 .
+ []
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[38] [39] [40
+[44]
+Capítulo 3.
+[45
 
 ]
-Capítulo 3.
-[41]
 File: AEDFR_files/figure-latex/densidad-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/densidad-1.pdf>
 
@@ -1071,13 +1111,13 @@ File: AEDFR_files/figure-latex/normal-1.pdf Graphic file (type pdf)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[42]
+[46]
 File: AEDFR_files/figure-latex/normalmus-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/normalmus-1.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[43]
+[47]
 File: AEDFR_files/figure-latex/normalsds-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/normalsds-1.pdf>
 File: AEDFR_files/figure-latex/unasd-1.pdf Graphic file (type pdf)
@@ -1095,41 +1135,41 @@ File: AEDFR_files/figure-latex/tressd-1.pdf Graphic file (type pdf)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[44] [45]
+[48] [49]
 File: AEDFR_files/figure-latex/normalz-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/normalz-1.pdf>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 1905.
-[46]
+(Font)              <14.4> on input line 2145.
+[50]
 File: AEDFR_files/figure-latex/tstudent-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/tstudent-1.pdf>
 File: AEDFR_files/figure-latex/tz-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/tz-1.pdf>
-[47] [48] [49] [50
+[51] [52] [53] [54
 
 ]
 Capítulo 4.
 File: infedesc.png Graphic file (type bmp)
 <infedesc.png>
-[51]
+[55]
 File: AEDFR_files/figure-latex/figura6-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/figura6-1.pdf>
-[52]
+[56]
 File: AEDFR_files/figure-latex/figura7-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/figura7-1.pdf>
 
 Underfull \vbox (badness 1314) has occurred while \output is active []
 
-[53]
+[57]
 File: ic.png Graphic file (type bmp)
 <ic.png>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 2166.
+(Font)              <12> on input line 2406.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 2166.
+(Font)              <8> on input line 2406.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 2166.
-[54] [55] [56] [57]
+(Font)              <6> on input line 2406.
+[58] [59] [60] [61]
 File: phtest.png Graphic file (type bmp)
 <phtest.png>
 
@@ -1150,50 +1190,50 @@ File: ph2c.png Graphic file (type bmp)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[58] [59]
+[62] [63]
 File: power.png Graphic file (type bmp)
 <power.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[60]
-Overfull \hbox (3.89061pt too wide) in alignment at lines 2426--2431
+[64]
+Overfull \hbox (3.89061pt too wide) in alignment at lines 2666--2671
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.89061pt too wide) in alignment at lines 2431--2435
+Overfull \hbox (3.89061pt too wide) in alignment at lines 2671--2675
  [] [] [] [] [] 
  []
 
 
-Overfull \hbox (3.89061pt too wide) in alignment at lines 2435--2444
+Overfull \hbox (3.89061pt too wide) in alignment at lines 2675--2684
  [] [] [] [] [] 
  []
 
-[61] [62] [63] [64]
-Underfull \hbox (badness 10000) in paragraph at lines 2645--2646
+[65] [66] [67] [68]
+Underfull \hbox (badness 10000) in paragraph at lines 2885--2886
 \TU/lmtt/m/n/10 y = NULL, alternative = "two.sided", mu = 0, sigma.x = NULL,   
 sigma.y = NULL, conf.level
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2681--2682
+Underfull \hbox (badness 10000) in paragraph at lines 2921--2922
 \TU/lmtt/m/n/10 NULL,alternative = c("two.sided", "less", "greater"),mu = 0, pa
 ired = FALSE, var.equal =
  []
 
-[65]
-Overfull \vbox (0.54279pt too high) detected at line 2757
+[69]
+Overfull \vbox (0.54279pt too high) detected at line 2997
  []
 
-[66] [67] [68] [69] [70] [71] [72
+[70] [71] [72] [73] [74] [75] [76] [77] [78
 
 ]
 Capítulo 5.
 File: corr.png Graphic file (type bmp)
 <corr.png>
-[73]
+[79]
 File: corr2.png Graphic file (type bmp)
 <corr2.png>
 File: AEDFR_files/figure-latex/corr3-1.pdf Graphic file (type pdf)
@@ -1206,10 +1246,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 6675) has occurred while \output is active []
 
-[74]
+[80]
 File: corr4.png Graphic file (type bmp)
 <corr4.png>
-[75]
+[81]
 File: AEDFR_files/figure-latex/vtaspub-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/vtaspub-1.pdf>
 File: AEDFR_files/figure-latex/centroide-1.pdf Graphic file (type pdf)
@@ -1217,10 +1257,10 @@ File: AEDFR_files/figure-latex/centroide-1.pdf Graphic file (type pdf)
 
 Underfull \vbox (badness 3417) has occurred while \output is active []
 
-[76]
+[82]
 Underfull \vbox (badness 3724) has occurred while \output is active []
 
-[77]
+[83]
 File: AEDFR_files/figure-latex/regre1-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/regre1-1.pdf>
 File: error.png Graphic file (type bmp)
@@ -1228,46 +1268,46 @@ File: error.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[78]
+[84]
 File: regre3.png Graphic file (type bmp)
 <regre3.png>
-[79] [80] [81]
+[85] [86] [87]
 File: error5.png Graphic file (type bmp)
 <error5.png>
-[82] [83]
+[88] [89]
 File: AEDFR_files/figure-latex/pairs-1.pdf Graphic file (type pdf)
 <use AEDFR_files/figure-latex/pairs-1.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[84] [85] [86] [87] [88
+[90] [91] [92] [93] [94
 
 ]
 Capítulo 6.
-[89] [90
+[95] [96
 
 ]
 Capítulo 7.
-(AEDFR.bbl [91] [92
+(AEDFR.bbl [97] [98
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3638.
-[93]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 3638.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 3963.
+[99]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 3963.
 (AEDFR.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3638.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3638.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 3963.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 3963.
 
 Package rerunfilecheck Info: File `AEDFR.out' has not changed.
-(rerunfilecheck)             Checksum: AFDF6A0D6402CD32D35F5EA2ECA65033.
+(rerunfilecheck)             Checksum: AC1CD312EF317A00AFD3E4A102999591.
  ) 
 Here is how much of TeX's memory you used:
- 25225 strings out of 427665
- 466997 string characters out of 3145051
- 627673 words of memory out of 3000000
- 28979 multiletter control sequences out of 15000+200000
- 561150 words of font info for 79 fonts, out of 3000000 for 9000
+ 25248 strings out of 427665
+ 467555 string characters out of 3145051
+ 628329 words of memory out of 3000000
+ 28998 multiletter control sequences out of 15000+200000
+ 561158 words of font info for 80 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
- 46i,10n,54p,1032b,456s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 46i,10n,54p,1032b,487s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on AEDFR.pdf (93 pages).
+Output written on AEDFR.pdf (99 pages).

@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="tablas-de-contingencia.html">
-<link rel="next" href="distr.html">
+<link rel="next" href="ejercicios.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -159,12 +159,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8.1" data-path="tablas-de-frecuencia.html"><a href="tablas-de-frecuencia.html#variables-cualitativas"><i class="fa fa-check"></i><b>2.8.1</b> Variables Cualitativas</a></li>
 <li class="chapter" data-level="2.8.2" data-path="tablas-de-frecuencia.html"><a href="tablas-de-frecuencia.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.8.2</b> Variables Cuantitativas</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>2.9</b> Tablas de Contingencia</a></li>
+<li class="chapter" data-level="2.9" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html"><i class="fa fa-check"></i><b>2.9</b> Tablas de Contingencia</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="tablas-de-contingencia.html"><a href="tablas-de-contingencia.html#las-funciones-spread-y-gather"><i class="fa fa-check"></i><b>2.9.1</b> Las funciones <code>spread</code> y <code>gather</code></a></li>
+</ul></li>
 <li class="chapter" data-level="2.10" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html"><i class="fa fa-check"></i><b>2.10</b> Gráficos y Visualización</a><ul>
 <li class="chapter" data-level="2.10.1" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#histogramas"><i class="fa fa-check"></i><b>2.10.1</b> Histogramas</a></li>
 <li class="chapter" data-level="2.10.2" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#diagrama-de-barras"><i class="fa fa-check"></i><b>2.10.2</b> Diagrama de barras</a></li>
 <li class="chapter" data-level="2.10.3" data-path="graficos-y-visualizacion.html"><a href="graficos-y-visualizacion.html#boxes"><i class="fa fa-check"></i><b>2.10.3</b> Diagramas de Caja y valores atípicos</a></li>
 </ul></li>
+<li class="chapter" data-level="2.11" data-path="ejercicios.html"><a href="ejercicios.html"><i class="fa fa-check"></i><b>2.11</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="distr.html"><a href="distr.html"><i class="fa fa-check"></i><b>3</b> Distribuciones de probabilidad</a><ul>
 <li class="chapter" data-level="3.1" data-path="variable-aleatoria-y-distribucion-de-probabilidad.html"><a href="variable-aleatoria-y-distribucion-de-probabilidad.html"><i class="fa fa-check"></i><b>3.1</b> Variable aleatoria y distribución de probabilidad</a></li>
@@ -202,6 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.3" data-path="pruebas-de-hipotesis-en-r.html"><a href="pruebas-de-hipotesis-en-r.html#para-la-diferencia-de-medias"><i class="fa fa-check"></i><b>4.4.3</b> Para la diferencia de medias</a></li>
 <li class="chapter" data-level="4.4.4" data-path="pruebas-de-hipotesis-en-r.html"><a href="pruebas-de-hipotesis-en-r.html#para-la-diferencia-de-proporciones"><i class="fa fa-check"></i><b>4.4.4</b> Para la diferencia de proporciones</a></li>
 </ul></li>
+<li class="chapter" data-level="4.5" data-path="ejercicios-1.html"><a href="ejercicios-1.html"><i class="fa fa-check"></i><b>4.5</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>5</b> Correlación y Regresión</a><ul>
 <li class="chapter" data-level="5.1" data-path="correl.html"><a href="correl.html"><i class="fa fa-check"></i><b>5.1</b> Coeficiente de Correlación</a></li>
@@ -245,17 +249,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="histogramas" class="section level3">
 <h3><span class="header-section-number">2.10.1</span> Histogramas</h3>
 <p>Los histogramas se utilizan para variables continuas. Un histograma es un gráfico de la distribución de frecuencia de una variable, en el eje vertical se representa la frecuencia (absoluta o relativa) y en el eje horizontal los rangos de los valores.</p>
-<p>En la figura <a href="graficos-y-visualizacion.html#fig:figura1">2.12</a> se muestra el histograma de la variable ventas en millones de dólares del archivo <em>cap2_big4_size.csv</em> ya descrito en la sección <a href="primerR.html#primerR">2.4</a>, este primer histograma ha sido configurado para presentar 12 barras, que las barras sean de color azul con un contorno rojo. Antes de abordar los detalles mencionados discutiremos brevemente el funcionamiento de la gramática de <code>ggplot2</code>, una gráfica realizada en <code>ggplot2</code> empieza por <code>ggplot(data, aes())</code> dentro de <code>aes()</code> se indica las variables que van a intervenir en la gráfica, Luego se añade la <code>geom</code> con la que se va a trabajar en este caso se escogió <code>geom_histogram()</code> puesto que se desea realizar un histograma. Como se indicó anteriormente se configuró el histograma con 12 barras (<code>bins=12</code>), la opción <code>color="red"</code> permite que el contorno de las barrras sea rojo y la opción <code>fill="blue"</code>hace que las barras sean de color azul.</p>
+<p>En la figura <a href="graficos-y-visualizacion.html#fig:figura1">2.13</a> se muestra el histograma de la variable ventas en millones de dólares del archivo <em>cap2_big4_size.csv</em> ya descrito en la sección <a href="primerR.html#primerR">2.4</a>, este primer histograma ha sido configurado para presentar 12 barras, que las barras sean de color azul con un contorno rojo. Antes de abordar los detalles mencionados discutiremos brevemente el funcionamiento de la gramática de <code>ggplot2</code>, una gráfica realizada en <code>ggplot2</code> empieza por <code>ggplot(data, aes())</code> dentro de <code>aes()</code> se indica las variables que van a intervenir en la gráfica, Luego se añade la <code>geom</code> con la que se va a trabajar en este caso se escogió <code>geom_histogram()</code> puesto que se desea realizar un histograma. Como se indicó anteriormente se configuró el histograma con 12 barras (<code>bins=12</code>), la opción <code>color="red"</code> permite que el contorno de las barrras sea rojo y la opción <code>fill="blue"</code>hace que las barras sean de color azul.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(big4size, <span class="kw">aes</span>(<span class="dt">x=</span> VTAS<span class="op">/</span><span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">12</span>, <span class="dt">color=</span> <span class="st">&quot;red&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;blue&quot;</span> ) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme_light</span>()</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:figura1"></span>
 <img src="AEDFR_files/figure-html/figura1-1.png" alt="Histograma de las Ventas" width="60%" />
 <p class="caption">
-Figura 2.12: Histograma de las Ventas
+Figura 2.13: Histograma de las Ventas
 </p>
 </div>
-<p>Para configurar las etiquetas de los ejes podemos añadir las opciones <code>xlab( )</code> y <code>ylab( )</code>. En la figura <a href="graficos-y-visualizacion.html#fig:figura2">2.13</a> se aprecia el histograma con las etiquetas de los ejes añadidos.</p>
+<p>Para configurar las etiquetas de los ejes podemos añadir las opciones <code>xlab( )</code> y <code>ylab( )</code>. En la figura <a href="graficos-y-visualizacion.html#fig:figura2">2.14</a> se aprecia el histograma con las etiquetas de los ejes añadidos.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(big4size, <span class="kw">aes</span>(<span class="dt">x=</span> VTAS<span class="op">/</span><span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">12</span>, <span class="dt">color=</span> <span class="st">&quot;red&quot;</span>,  <span class="dt">fill=</span><span class="st">&quot;blue&quot;</span> ) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ventas en Millones de Dólares&quot;) + ylab(&quot;</span>Frecuencia<span class="st">&quot;) +</span>
@@ -263,42 +267,55 @@ Figura 2.12: Histograma de las Ventas
 <div class="figure" style="text-align: center"><span id="fig:figura2"></span>
 <img src="AEDFR_files/figure-html/figura2-1.png" alt="Histograma de las Ventas con Etiquetas en los Ejes" width="70%" />
 <p class="caption">
-Figura 2.13: Histograma de las Ventas con Etiquetas en los Ejes
+Figura 2.14: Histograma de las Ventas con Etiquetas en los Ejes
 </p>
 </div>
-<p>Usando el archivo <code>Ranking2018Guayas.csv</code>, vamos ahora a hacer el histograma de las ventas en millones de acuerdo al tamaño de la empresa. En la figura <a href="graficos-y-visualizacion.html#fig:figura3">2.14</a> se observa el histograma, para obtener un gráfico agradable a la vista se cambia la orientación de las marcas de <span class="math inline">\(0^\circ\)</span> a <span class="math inline">\(90^\circ\)</span> en el eje <span class="math inline">\(x\)</span> con la instrucción <code>theme(axis.text.x = element_text(angle = 90, hjust = 1))</code>.</p>
+<p>Usando el archivo <code>Ranking2018Guayas.csv</code>, vamos ahora a hacer el histograma de las ventas en millones de acuerdo al tamaño de la empresa. En la figura <a href="graficos-y-visualizacion.html#fig:figura3">2.15</a> se observa el histograma, para obtener un gráfico agradable a la vista se cambia la orientación de las marcas de <span class="math inline">\(0^\circ\)</span> a <span class="math inline">\(90^\circ\)</span> en el eje <span class="math inline">\(x\)</span> con la instrucción <code>theme(axis.text.x = element_text(angle = 90, hjust = 1))</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rank2018, <span class="kw">aes</span>(<span class="dt">x=</span>VENTAS<span class="op">/</span><span class="dv">1000000</span>, <span class="dt">fill=</span>TAMAÑO)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">bins =</span> <span class="dv">20</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>), 
         <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ventas en Miles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frecuencia&quot;</span>) </code></pre>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ventas en Millones&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frecuencia&quot;</span>) </code></pre>
 <div class="figure" style="text-align: center"><span id="fig:figura3"></span>
 <img src="AEDFR_files/figure-html/figura3-1.png" alt="Histograma de las Ventas de Acuerdo al Tamaño de la empresa" width="60%" />
 <p class="caption">
-Figura 2.14: Histograma de las Ventas de Acuerdo al Tamaño de la empresa
+Figura 2.15: Histograma de las Ventas de Acuerdo al Tamaño de la empresa
 </p>
 </div>
-<p>Se puede observar en la <a href="graficos-y-visualizacion.html#fig:figura3">2.14</a> que algunas empresas medianas tienen mayores ventas que el resto de empresas. Una mejor forma de comparar la distribución de una variable de acuerdo a otra variable es usar los diagramas de caja que serán discutidos en profundidad en la sección <a href="graficos-y-visualizacion.html#boxes">2.10.3</a>.</p>
+<p>Se puede observar en la <a href="graficos-y-visualizacion.html#fig:figura3">2.15</a> que algunas empresas grandes tienen mayores ventas que el resto de empresas. Una mejor forma de comparar la distribución de una variable de acuerdo a otra variable es usar los diagramas de caja que serán discutidos en profundidad en la sección <a href="graficos-y-visualizacion.html#boxes">2.10.3</a>.</p>
+<p>Si se desea ver los histogramas de acuerdo al tamaño de empresa se puede separar los histogramas con la opción <code>facet_grid(. ~ VARIABLE)</code>, dentro de esta opción se escribe el nombre de la variable por la que se quiere separar el gráfico, en este caso se escribe <code>facet_grid(. ~ TAMAÑO)</code>. Un ejemplo se visualiza en la figura <a href="graficos-y-visualizacion.html#fig:histfacet">2.16</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rank2018, <span class="kw">aes</span>(<span class="dt">x=</span>VENTAS<span class="op">/</span><span class="dv">1000000</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">bins =</span> <span class="dv">10</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>), 
+        <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;white&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ventas en Miles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frecuencia&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>TAMAÑO)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:histfacet"></span>
+<img src="AEDFR_files/figure-html/histfacet-1.png" alt="Histograma de las Ventas de Acuerdo al Tamaño de la empresa" width="60%" />
+<p class="caption">
+Figura 2.16: Histograma de las Ventas de Acuerdo al Tamaño de la empresa
+</p>
+</div>
 <div id="simetria-y-sesgo" class="section level4">
 <h4><span class="header-section-number">2.10.1.1</span> Simetría y sesgo</h4>
-<p>Un histograma es <em>simétrico</em> en forma si hacia la derecha y la izquierda tiene la misma forma como se aprecia en la parte superior de la figura <a href="graficos-y-visualizacion.html#fig:sime1">2.15</a>. Cuando el lado derecho del histograma, que contiene la mitad más grande de las observaciones en los datos, se extiende una distancia mayor que el lado izquierdo se dice que el histograma esta <strong>sesgado a la derecha</strong> como se aprecia en la parte superior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoright">2.16</a>. Finalmente el histograma es <strong>sesgado a la izquierda</strong> cuando el lado izquierdo se extiende una distancia mucho mayor que el lado derecho, un ejemplo se aprecia en la parte superior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoleft">2.17</a>.</p>
-<p>En la sección <a href="tendcentr.html#tendcentr">2.5</a> se discutieron las medidas de tendencia central, ¿cómo se relacionan las medidas de tendencia central y el sesgo? Si la distribución es simétrica se cumple que <span class="math inline">\(\bar{x}=Me=Mo\)</span>, esto se puede visualizar en la parte inferior de la figura <a href="graficos-y-visualizacion.html#fig:sime1">2.15</a>. Cuando es sesgada a la derecha se cumple que <span class="math inline">\(Mo &lt; Me &lt; \bar{x}\)</span> en la parte inferior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoright">2.16</a> se visualiza la moda de color azul, la mediana de color rojo y la media de color verde. Mientras que si es sesgada a la izquierda se puede verificar que <span class="math inline">\(\bar{x} &lt; Me &lt; Mo\)</span> como se aprecia en la parte inferior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoleft">2.17</a>.</p>
+<p>Un histograma es <em>simétrico</em> en forma si hacia la derecha y la izquierda tiene la misma forma como se aprecia en la parte superior de la figura <a href="graficos-y-visualizacion.html#fig:sime1">2.17</a>. Cuando el lado derecho del histograma, que contiene la mitad más grande de las observaciones en los datos, se extiende una distancia mayor que el lado izquierdo se dice que el histograma esta <strong>sesgado a la derecha</strong> como se aprecia en la parte superior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoright">2.18</a>. Finalmente el histograma es <strong>sesgado a la izquierda</strong> cuando el lado izquierdo se extiende una distancia mucho mayor que el lado derecho, un ejemplo se aprecia en la parte superior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoleft">2.19</a>.</p>
+<p>En la sección <a href="tendcentr.html#tendcentr">2.5</a> se discutieron las medidas de tendencia central, ¿cómo se relacionan las medidas de tendencia central y el sesgo? Si la distribución es simétrica se cumple que <span class="math inline">\(\bar{x}=Me=Mo\)</span>, esto se puede visualizar en la parte inferior de la figura <a href="graficos-y-visualizacion.html#fig:sime1">2.17</a>. Cuando es sesgada a la derecha se cumple que <span class="math inline">\(Mo &lt; Me &lt; \bar{x}\)</span> en la parte inferior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoright">2.18</a> se visualiza la moda de color azul, la mediana de color rojo y la media de color verde. Mientras que si es sesgada a la izquierda se puede verificar que <span class="math inline">\(\bar{x} &lt; Me &lt; Mo\)</span> como se aprecia en la parte inferior de la figura <a href="graficos-y-visualizacion.html#fig:sesgoleft">2.19</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:sime1"></span>
 <img src="AEDFR_files/figure-html/sime1-1.png" alt="Histograma Simétrico" width="50%" />
 <p class="caption">
-Figura 2.15: Histograma Simétrico
+Figura 2.17: Histograma Simétrico
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:sesgoright"></span>
 <img src="AEDFR_files/figure-html/sesgoright-1.png" alt="Histograma Sesgado a la Derecha" width="50%" />
 <p class="caption">
-Figura 2.16: Histograma Sesgado a la Derecha
+Figura 2.18: Histograma Sesgado a la Derecha
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:sesgoleft"></span>
 <img src="AEDFR_files/figure-html/sesgoleft-1.png" alt="Histograma Sesgado a la Izquierda" width="60%" />
 <p class="caption">
-Figura 2.17: Histograma Sesgado a la Izquierda
+Figura 2.19: Histograma Sesgado a la Izquierda
 </p>
 </div>
 
@@ -311,18 +328,18 @@ Figura 2.17: Histograma Sesgado a la Izquierda
 <pre class="sourceCode r"><code class="sourceCode r">rank2018com =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Ranking2018Comercio.csv&quot;</span>,<span class="dt">header =</span> T,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>,<span class="dt">dec=</span><span class="st">&quot;,&quot;</span>)
 <span class="kw">str</span>(rank2018com)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    507 obs. of  12 variables:
-##  $ EXPEDIENTE: int  11069 103998 23140 165341 49377 93937 64400 134199 13963 95267 ...
-##  $ TIPO      : Factor w/ 3 levels &quot;ANÓNIMA&quot;,&quot;RESPONSABILIDAD LIMITADA&quot;,..: 1 1 2 1 1 2 1 1 2 2 ...
-##  $ ACTIVIDAD : Factor w/ 112 levels &quot;G4510.01&quot;,&quot;G4520.01&quot;,..: 69 69 71 69 42 1 4 26 60 76 ...
-##  $ REGIÓN    : Factor w/ 4 levels &quot;COSTA&quot;,&quot;GALAPAGOS&quot;,..: 4 1 1 1 4 4 4 1 4 4 ...
-##  $ PROVINCIA : Factor w/ 16 levels &quot;AZUAY&quot;,&quot;BOLIVAR&quot;,..: 12 7 5 7 12 14 12 7 12 1 ...
-##  $ TAMA      : Factor w/ 4 levels &quot;GRANDE&quot;,&quot;MEDIANA&quot;,..: 1 1 1 1 1 1 1 1 2 1 ...
-##  $ SECTOR    : Factor w/ 2 levels &quot;MERCADO DE VALORES&quot;,..: 2 2 2 2 2 1 2 2 2 2 ...
-##  $ EMPLEADOS : int  560 145 65 108 65 84 127 45 72 20 ...
-##  $ ACTIVO    : num  19013933 16498975 13759911 13015775 12664280 ...
-##  $ PATRIMONIO: num  5441046 11084842 1854108 4353938 4547432 ...
-##  $ VENTAS    : num  27523262 54939461 16703973 20409277 19232071 ...
-##  $ UTILIDAD  : num  2935434 1180875 229199 81757 -900404 ...</code></pre>
+##  $ EXPEDIENTE: int  103998 93937 11069 64400 165341 49377 23140 95267 134199 139976 ...
+##  $ TIPO      : Factor w/ 3 levels &quot;ANÓNIMA&quot;,&quot;RESPONSABILIDAD LIMITADA&quot;,..: 1 2 1 1 1 1 2 2 1 3 ...
+##  $ ACTIVIDAD : Factor w/ 112 levels &quot;G4510.01&quot;,&quot;G4520.01&quot;,..: 69 1 69 4 69 42 71 76 26 64 ...
+##  $ REGIÓN    : Factor w/ 4 levels &quot;COSTA&quot;,&quot;GALAPAGOS&quot;,..: 1 4 4 4 1 4 1 4 1 4 ...
+##  $ PROVINCIA : Factor w/ 16 levels &quot;AZUAY&quot;,&quot;BOLIVAR&quot;,..: 7 14 12 12 7 12 5 1 7 12 ...
+##  $ TAMA      : Factor w/ 4 levels &quot;GRANDE&quot;,&quot;MEDIANA&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ SECTOR    : Factor w/ 2 levels &quot;MERCADO DE VALORES&quot;,..: 2 1 2 2 2 2 2 2 2 2 ...
+##  $ EMPLEADOS : int  145 84 560 127 108 65 65 20 45 4 ...
+##  $ ACTIVO    : num  16498975 11244874 19013933 9995738 13015775 ...
+##  $ PATRIMONIO: num  11084842 4368086 5441046 5025093 4353938 ...
+##  $ VENTAS    : num  54939461 29561928 27523262 20630697 20409277 ...
+##  $ UTILIDAD  : num  1180875 596397 2935434 333168 81757 ...</code></pre>
 <p>El conjunto de datos tiene 507 observaciones con 12 variables. Las variables presentes en este conjunto de datos son:</p>
 <ol style="list-style-type: decimal">
 <li><code>EXPEDIENTE</code> variable cualitativa que almacena el número de expediente asignado por la Superintendencia de Compañías.</li>
@@ -334,9 +351,9 @@ Figura 2.17: Histograma Sesgado a la Izquierda
 <li><code>SECTOR</code> variable cualitativa con nivel de medición ordinal que indica el sector al que pertenece la empresa.</li>
 <li><code>EMPLEADOS</code>variable cuantitativa discreta que almacena el número de empleados de la empresa.</li>
 <li><code>ACTIVO</code> variable cuantitativa continua que almacena el valor de los activos en libros de la empresa.</li>
-<li><code>PATRIMONIO</code> varaible cuantitativa continua que almacena el valor del patrimonio en libros de la empresa.</li>
-<li><code>VENTAS</code> varaible cuantitativa continua que almacena el valor de las ventas en libros de la empresa.</li>
-<li><code>UTILIDAD</code> varaible cuantitativa continua que almacena el valor de la utilidad en libros de la empresa.</li>
+<li><code>PATRIMONIO</code> variable cuantitativa continua que almacena el valor del patrimonio en libros de la empresa.</li>
+<li><code>VENTAS</code> variable cuantitativa continua que almacena el valor de las ventas en libros de la empresa.</li>
+<li><code>UTILIDAD</code> variable cuantitativa continua que almacena el valor de la utilidad en libros de la empresa.</li>
 </ol>
 <p>Como hemos dicho anteriormente los diagramas de barra se utilizan para variables cualitativas. Vamos a comenzar elaborando una tabla de frecuencias de las empresas por región.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tabla_reg &lt;-<span class="st"> </span>rank2018com <span class="op">%&gt;%</span>
@@ -353,14 +370,14 @@ Figura 2.17: Histograma Sesgado a la Izquierda
 ## 2 SIERRA           133      26.2 
 ## 3 ORIENTE            4       0.79
 ## 4 GALAPAGOS          2       0.39</code></pre>
-<p>Para hacer diagramas de barras se utiliza <code>geom_bar()</code> en este caso como deseamos hacer un diagrama de barras de las frecuencias dentro de <code>geom_bar()</code> esvribimos <code>stat="count"</code>. En la figura <a href="graficos-y-visualizacion.html#fig:barras1">2.18</a> se observa el gráfico de barras de las empresas por región.</p>
+<p>Para hacer diagramas de barras se utiliza <code>geom_bar()</code> en este caso como deseamos hacer un diagrama de barras de las frecuencias dentro de <code>geom_bar()</code> esvribimos <code>stat="count"</code>. En la figura <a href="graficos-y-visualizacion.html#fig:barras1">2.20</a> se observa el gráfico de barras de las empresas por región.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rank2018com, <span class="kw">aes</span>(<span class="dt">x=</span>REGIÓN)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frecuencia&quot;</span>)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:barras1"></span>
 <img src="AEDFR_files/figure-html/barras1-1.png" alt="Gráfico de Barras de las empresas por Región" width="60%" />
 <p class="caption">
-Figura 2.18: Gráfico de Barras de las empresas por Región
+Figura 2.20: Gráfico de Barras de las empresas por Región
 </p>
 </div>
 <p>En la figura se observa que las regiones están en orden alfabético. Supongamos que se desea ordenar las regiones en el siguiente orden:</p>
@@ -373,14 +390,14 @@ Figura 2.18: Gráfico de Barras de las empresas por Región
 <p>Para lograr este objetivo, antes de hacer el diagrama de barras debemos reordenar las regiones. Como se muestra a continuación:</p>
 <pre class="sourceCode r"><code class="sourceCode r">rank2018com<span class="op">$</span>REGIÓN &lt;-<span class="st"> </span><span class="kw">factor</span>(rank2018com<span class="op">$</span>REGIÓN,
                              <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;COSTA&quot;</span>, <span class="st">&quot;SIERRA&quot;</span>, <span class="st">&quot;ORIENTE&quot;</span>, <span class="st">&quot;GALAPAGOS&quot;</span>))</code></pre>
-<p>Luego de reordenar las regiones podemos volver a realizar el gráfico de barras pero esta vez obtendremos las regiones en el orden deseado como se observa en la figura <a href="graficos-y-visualizacion.html#fig:barras2">2.19</a>:</p>
+<p>Luego de reordenar las regiones podemos volver a realizar el gráfico de barras pero esta vez obtendremos las regiones en el orden deseado como se observa en la figura <a href="graficos-y-visualizacion.html#fig:barras2">2.21</a>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rank2018com, <span class="kw">aes</span>(<span class="dt">x=</span>REGIÓN)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>,<span class="dt">col=</span><span class="st">&quot;black&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frecuencia&quot;</span>)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:barras2"></span>
 <img src="AEDFR_files/figure-html/barras2-1.png" alt="Gráfico de Barras de las empresas por Región (Ordenadas)" width="60%" />
 <p class="caption">
-Figura 2.19: Gráfico de Barras de las empresas por Región (Ordenadas)
+Figura 2.21: Gráfico de Barras de las empresas por Región (Ordenadas)
 </p>
 </div>
 <p>Supongamos ahora que queremos hacer un gráfico de barras de las empresas por región y por tamaño. Elaboremos primero una tabla de contingencia que contenga la información solicitada.</p>
@@ -405,14 +422,25 @@ Figura 2.19: Gráfico de Barras de las empresas por Región (Ordenadas)
 <div class="figure" style="text-align: center"><span id="fig:barras3"></span>
 <img src="AEDFR_files/figure-html/barras3-1.png" alt="Gráfico de Barras de las empresas por Región y por Tamaño" width="60%" />
 <p class="caption">
-Figura 2.20: Gráfico de Barras de las empresas por Región y por Tamaño
+Figura 2.22: Gráfico de Barras de las empresas por Región y por Tamaño
+</p>
+</div>
+<p>Se puede notar que en las leyendas ubicadas a la derecha del histograma, el título es <em>TAMA</em> porque la variable tiene ese nombre si quisierámos poner el nombre completo agregamos la opción <code>scale_fill_discrete(name="Tamaño")</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rank2018com, <span class="kw">aes</span>(<span class="dt">x=</span>REGIÓN,<span class="dt">fill=</span>TAMA)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;count&quot;</span>,<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_discrete</span>(<span class="dt">name=</span><span class="st">&quot;Tamaño&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frecuencia&quot;</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:barras4"></span>
+<img src="AEDFR_files/figure-html/barras4-1.png" alt="Gráfico de Barras de las empresas por Región y por Tamaño" width="60%" />
+<p class="caption">
+Figura 2.23: Gráfico de Barras de las empresas por Región y por Tamaño
 </p>
 </div>
 </div>
 <div id="boxes" class="section level3">
 <h3><span class="header-section-number">2.10.3</span> Diagramas de Caja y valores atípicos</h3>
-<p>En la <a href="graficos-y-visualizacion.html#fig:figura3">2.14</a> se pretendía mostrar la distribución de las ventas de acuerdo al tamaño de la empresa. Sin embargo el histograma no mostraba claramente la distribución de acuerdo al tamaño de la empresa. una alternativa es usar un diagrama de caja.</p>
-<p>Un diagrama de caja está formado por 5 valores que lo resumen, estos 5 valores se muestran en la figura <a href="graficos-y-visualizacion.html#fig:caja1">2.21</a>. La distancia entre el primer y el tercer cuartil se la conoce como rango intercuartílico (IQR, por sus siglas en inglés). El límite superior es igual al tercer cuartil más 1.5 veces el rango intercuartílico, valores mayores a esta cantidad se consideran valores atípicos. Mientras que el límite inferior es igual al primer cuartil menos 1.5 veces el rango intercuartílico y valores menores a esta cantidad se consideran valores atípicos.</p>
+<p>En la figura <a href="graficos-y-visualizacion.html#fig:figura3">2.15</a> se pretendía mostrar la distribución de las ventas de acuerdo al tamaño de la empresa. Sin embargo el histograma no mostraba claramente la distribución de acuerdo al tamaño de la empresa. una alternativa es usar un diagrama de caja.</p>
+<p>Un diagrama de caja está formado por 5 valores que lo resumen, estos 5 valores se muestran en la figura <a href="graficos-y-visualizacion.html#fig:caja1">2.24</a>. La distancia entre el primer y el tercer cuartil se la conoce como rango intercuartílico (IQR, por sus siglas en inglés). El límite superior es igual al tercer cuartil más 1.5 veces el rango intercuartílico, valores mayores a esta cantidad se consideran valores atípicos. Mientras que el límite inferior es igual al primer cuartil menos 1.5 veces el rango intercuartílico y valores menores a esta cantidad se consideran valores atípicos.</p>
 <p><span class="math display" id="eq:iqr">\[\begin{equation} 
   IQR = Q_3 - Q_1
   \tag{2.14}
@@ -428,17 +456,17 @@ Figura 2.20: Gráfico de Barras de las empresas por Región y por Tamaño
 <div class="figure" style="text-align: center"><span id="fig:caja1"></span>
 <img src="boxplot3.png" alt="Partes de un Diagrama de Caja" width="40%" />
 <p class="caption">
-Figura 2.21: Partes de un Diagrama de Caja
+Figura 2.24: Partes de un Diagrama de Caja
 </p>
 </div>
-<p>En la figura <a href="graficos-y-visualizacion.html#fig:figura4">2.22</a> se observan los diagramas de caja de las ventas según el tamaño de la empresa. Se puede notar que existen diferencias entre las ventas de las empresas medianas, las microempresas y las pequeñas. El <span class="math inline">\(50\%\)</span> de las empresas medianas vende más de <span class="math inline">\(1250000\)</span>, mientras que todas las microempresas venden menos de <span class="math inline">\(250000\)</span>. Las empresas pequeñas que venden más de <span class="math inline">\(500000\)</span> son atípicas, mientras que en las empresas medianas no se presentan valores atípicos.</p>
+<p>En la figura <a href="graficos-y-visualizacion.html#fig:figura4">2.25</a> se observan los diagramas de caja de las ventas según el tamaño de la empresa. Se puede notar que existen diferencias entre las ventas de las empresas medianas, las microempresas y las pequeñas. El <span class="math inline">\(50\%\)</span> de las empresas medianas vende más de <span class="math inline">\(1250000\)</span>, mientras que todas las microempresas venden menos de <span class="math inline">\(250000\)</span>. Las empresas pequeñas que venden más de <span class="math inline">\(500000\)</span> son atípicas, mientras que en las empresas medianas no se presentan valores atípicos.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(rank2018, <span class="kw">aes</span>(TAMAÑO, VENTAS<span class="op">/</span><span class="dv">1000</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Tamaño de las empresas&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Ventas en Miles de Dólares&quot;) +theme_light()</span></code></pre>
 <div class="figure" style="text-align: center"><span id="fig:figura4"></span>
 <img src="AEDFR_files/figure-html/figura4-1.png" alt="Diagrama de Caja de las Ventas según el Tamaño de la empresa" width="60%" />
 <p class="caption">
-Figura 2.22: Diagrama de Caja de las Ventas según el Tamaño de la empresa
+Figura 2.25: Diagrama de Caja de las Ventas según el Tamaño de la empresa
 </p>
 </div>
 <p>Si se quisiera analizar con mayor detalle las microempresas se podría seleccionar solo las empresas con este tamaño y elaborar el diagrama de caja correspondiente, para lograr esto se utiliza la función <code>subset(df, cond)</code>. donde <code>df</code> corresponde al <em>data frame</em> usado y <em>cond</em> a la regla que deben cumplir los datos a ser analizados.</p>
@@ -448,13 +476,12 @@ Figura 2.22: Diagrama de Caja de las Ventas según el Tamaño de la empresa
 <div class="figure" style="text-align: center"><span id="fig:figura5"></span>
 <img src="AEDFR_files/figure-html/figura5-1.png" alt="Diagrama de Caja de las Ventas de las Microempresas" width="60%" />
 <p class="caption">
-Figura 2.23: Diagrama de Caja de las Ventas de las Microempresas
+Figura 2.26: Diagrama de Caja de las Ventas de las Microempresas
 </p>
 </div>
 
 </div>
 </div>
-<!-- </div> -->
 <h3>Bibliografía</h3>
 <div id="refs" class="references">
 <div id="ref-wilkinson2005">
@@ -467,7 +494,7 @@ Figura 2.23: Diagrama de Caja de las Ventas de las Microempresas
         </div>
       </div>
 <a href="tablas-de-contingencia.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="distr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ejercicios.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
